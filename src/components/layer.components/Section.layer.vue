@@ -38,7 +38,7 @@ export default {
             allowedClass: {
                 backgroundColor: ['Default', 'primary', 'secondary'],
                 type: ['Default', 'splited'],
-                height: ['Default', 'fullHeight', '75', '66', '50', '33'],
+                height: ['Default', 'fullHeight', 'landing', '75', '66', '50', '33'],
             }
         }
     },
@@ -66,6 +66,11 @@ section {
     &.fullHeight{
         height: 100vh;
         padding: var(--m-1);
+    }
+
+    &.landing{
+        min-height: 100vh;
+        padding: var(--m-1) var(--m-3);
     }
 
     &.splited {

@@ -83,15 +83,30 @@
  *
  */
 
- @mixin customFlex($direction: row, $mode: 'compact') {
+ @mixin customFlex($direction: row, $mode: 'compact', $wrap: nowrap, $gap: 0) {
     display: flex;
     flex-direction: $direction;
+    flex-wrap: $wrap;
+
+    // GAP
+    @if $gap > 1 & $gap < 5 {
+        gap: var(--m- + $gap);
+    }
 
     @if $mode == 'extend' {
         &>*{
             flex: 1;
         }
     }
+
+    @if $wrap == wrap {
+        &>*{
+            flex: 1;
+        }
+    }
+
+
+    
 }
 
 /*
