@@ -1,9 +1,16 @@
-<script setup>
-import TheWelcome from '@/components/TheWelcome.vue'
+<script>
+import Section from '@/components/layer.components/Section.layer.vue'
+
+export default {
+  name: 'Home',
+  components: {
+    Section
+  }
+}
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <Section :height="'fullHeight'">
+    <h1>Hello on Netflux</h1>
+  </Section>
 </template>
