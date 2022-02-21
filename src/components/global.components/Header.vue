@@ -5,25 +5,33 @@
       <nav>
         <ul>
           <li><RouterLink to="/">Home</RouterLink></li>
-          <li><RouterLink to="/series">Series</RouterLink></li>
-          <li><RouterLink to="/films">Films</RouterLink></li>
+          <li><RouterLink to="/shows">Shows</RouterLink></li>
           <li><RouterLink to="/my-list">My list</RouterLink></li>
         </ul>
       </nav>
     </div>
     <div class="header-navigation right">
-      <SearchBar></SearchBar>
-      <RouterLink to="/my-account">Account Logo</RouterLink>
+      <SearchBar @user:search="newSearch"></SearchBar>
     </div>
   </header>
 </template>
 
 <script>
 import SearchBar from '@/components/form.components/SearchBar.form.vue'
+import { useSearchStore } from '@/stores/search.store'
 
 export default {
   components: {
     SearchBar
+  },
+  setup() {
+    const searchStore = useSearchStore();
+    return { searchStore }
+  },
+  methods: {
+    newSearch(e){
+      this.searchStore.newSearch(e);
+    }
   }
 }
 </script>
