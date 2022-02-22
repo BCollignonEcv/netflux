@@ -3,23 +3,23 @@
   <div class="shows">
       <h1>This is an shows page</h1>
   </div>
-  <ShowList :shows="searchStore.getSearchResults"/>
+  <Slider :title="'Search'" :shows="showStore.getSearchResults" :options="{scrollabled: false}"/>
   </Section>
 </template>
 
 <script>
-import { useSearchStore } from '@/stores/search.store'
+import { useShowStore } from '@/stores/show.store'
 import Section from '@/components/layer.components/Section.layer.vue'
-import ShowList from '@/components/Custom/Show/ShowList.vue'
+import Slider from '@/components/Custom/Slider/Slider.vue'
 
 export default {
   name: 'Shows',
   components: {
-    Section, ShowList,
+    Section, Slider,
   },
   setup() {
-    const searchStore = useSearchStore();
-    return { searchStore }
+    const showStore = useShowStore();
+    return { showStore }
   },
 }
 </script>

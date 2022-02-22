@@ -1,23 +1,30 @@
 <template>
-  <div class="shows">
-    <h1>This is an single show page</h1>
-  </div>
+  <Section :height="'landing'">
+    <div class="show">
+        <h1>{{show.title}}</h1>
+    </div>
+  </Section>
 </template>
 
 <script>
-import { useSearchStore } from '@/stores/search.store'
+import { useShowStore } from '@/stores/show.store'
+import Section from '@/components/layer.components/Section.layer.vue'
 
 export default {
   name: 'Show',
-    props: {
+  components: {
+    Section
+  },
+  props: {
     show: {
       type: String,
       default: ''
     }
   },
+
   setup() {
-    const searchStore = useSearchStore();
-    return { searchStore }
+    const showStore = useShowStore();
+    return { showStore }
   },
 }
 </script>

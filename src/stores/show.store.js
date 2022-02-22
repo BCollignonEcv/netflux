@@ -3,12 +3,15 @@ import ApiService from '@/services/api.service.js'
 
 const ApiServiceInstance = new ApiService()
 
-export const useSearchStore = defineStore({
-    id: 'search',
+export const useShowStore = defineStore({
+    id: 'show',
     state: () => ({
         searchHistory: [],
         search: '',
-        searchResults: [],
+        shows: {
+            searchResults: [],
+            news: [],
+        },
     }),
     getters: {
         getCurrentSearch: (state) => { 
@@ -17,8 +20,14 @@ export const useSearchStore = defineStore({
         getSearchHistory: (state) => { 
             return state.searchHistory ;
         },
+        getShows: (state) => { 
+            return state.shows ;
+        },
+        getShowsNews: (state) => { 
+            return state.shows.news;
+        },
         getSearchResults: (state) => { 
-            return state.searchResults ;
+            return state.shows.searchResults ;
         },
         getLastSearch: (state) => {
             if(state.searchHistory.length > 1){
@@ -36,6 +45,9 @@ export const useSearchStore = defineStore({
         },
     },
     actions: {
+        initShows(){
+            this.requestNews();
+        },
         newSearch(newSearch){
             if(newSearch != '' && newSearch != this.search){
                 this.search = newSearch;
@@ -43,9 +55,12 @@ export const useSearchStore = defineStore({
                 this.requestSearch();
             }
         },
+        async requestNews(){
+            this.shows.news = await ApiServiceInstance.getShowsNews();
+        },
         async requestSearch(urlSearch = null){
             let search = urlSearch ? urlSearch : this.search;
-            this.searchResults = await ApiServiceInstance.searchShows({ search: search});
+            this.shows.searchResults = await ApiServiceInstance.searchShows({ search: search});
         }
     }
 })
