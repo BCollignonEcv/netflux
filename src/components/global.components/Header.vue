@@ -18,19 +18,20 @@
 
 <script>
 import SearchBar from '@/components/form.components/SearchBar.form.vue'
-import { useSearchStore } from '@/stores/search.store'
+import { useShowStore } from '@/stores/show.store'
 
 export default {
   components: {
     SearchBar
   },
   setup() {
-    const searchStore = useSearchStore();
-    return { searchStore }
+    const showStore = useShowStore();
+    return { showStore }
   },
   methods: {
     newSearch(e){
-      this.searchStore.newSearch(e);
+      this.showStore.newSearch(e);
+      this.$router.push({name: 'shows'})
     }
   }
 }

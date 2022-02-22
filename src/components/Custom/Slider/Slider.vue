@@ -1,10 +1,10 @@
 <script>
-import ShowListItem from './ShowListItem.vue'
+import SliderItem from './SliderItem.vue'
 
 export default {
-    name: 'ShowList',
+    name: 'Slider',
     components: {
-        ShowListItem
+        SliderItem
     },
     props: {
         title: String, 
@@ -13,7 +13,7 @@ export default {
             default() {
                 return {
                     wishlistDisabled: false,
-                    scrollable: false
+                    scrollable: true
                 }
             }
         }, 
@@ -21,18 +21,23 @@ export default {
     },
     data(){
         return {}
-    }
+    },
+    computed: {
+        hasShows(){
+            return this.shows && this.shows.length > 0
+        }
+    },
 }
 </script>
 <template>
   <div class="shows-list">
-      <h2 v-if="title">{{title}}</h2>
+      <h2 v-if="title && hasShows">{{title}}</h2>
       <div class="shows-list-container">
-        <ShowListItem 
+        <SliderItem 
             v-for="show in shows" :key="show.id" 
             :show="show" 
             :wishlistDisabled="this.options.wishlistDisabled"
-            :scrollabled="this.options.scrollabled"
+            :class="{ 'catalog': !this.options.scrollabled }"
         />
       </div>
   </div>
@@ -42,8 +47,12 @@ export default {
     .shows-list{
         padding: var(--m-3) 0;
         .shows-list-container {
-            @include customFlex($gap: 2);
+            @include customFlex($gap: 5, $mode: 'extend');
             padding: var(--m-5) 0;
+
+            &.catalog{
+                @include customFlex($wrap: nowrap);
+            }
         }
     }
 </style>
