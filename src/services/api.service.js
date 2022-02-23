@@ -10,10 +10,10 @@ export default class ApiService {
     }
     getShows(params = null) {
         let that = this;
-        that.request.url = `${this.url}/search/shows`;
+        that.request.url = `${this.url}/shows`;
 
         if(params && params.search){
-            that.request.url = `${that.request.url}?q=${params.search}`;
+            that.request.url = `${this.url}/search/shows?q=${params.search}`;
         } 
 
         return axios(that.request).then((response) => {

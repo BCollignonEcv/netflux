@@ -27,11 +27,20 @@ export default {
 <template>
   <Section :height="'landing'">
     <h1>Hello on Netflux</h1>
+    
+  </Section>
+  <Section>
     <transition>
       <template v-if="userStore.hasOneShow">
         <Slider :title="'Your selection'" :options="{ wishlistDisabled: true, scrollabled: true}" :shows="userStore.getShowsListFirstTen"/>
       </template>
     </transition>
-    <!-- <Slider :title="'News'" :shows="showStore.getShowsNews"/> -->
+  </Section>
+  <Section>
+    <transition>
+      <template>
+        <Slider :title="'All'" :options="{ wishlistDisabled: true, scrollabled: true}" :shows="showStore.getShows"/>
+      </template>
+    </transition>
   </Section>
 </template>

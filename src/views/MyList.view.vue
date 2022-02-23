@@ -3,7 +3,7 @@
     <h1>My list</h1>
     <transition>
       <template v-if="userStore.hasOneShow">
-        <Slider :options="{ wishlistDisabled: true}" :shows="userStore.getShowsListFirstTen"/>
+        <Slider :options="{ wishlistDisabled: true}" :shows="userStore.getShowsList"/>
       </template>
     </transition>
   </Section>
