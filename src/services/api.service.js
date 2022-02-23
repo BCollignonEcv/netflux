@@ -8,6 +8,18 @@ export default class ApiService {
             url: this.url,
         };
     }
+    getShows(params = null) {
+        let that = this;
+        that.request.url = `${this.url}/search/shows`;
+
+        if(params && params.search){
+            that.request.url = `${that.request.url}?q=${params.search}`;
+        } 
+
+        return axios(that.request).then((response) => {
+            return response.data;
+        });
+    };
     getShowByID(params) {
         let that = this;
         if(!params.id){
@@ -45,14 +57,4 @@ export default class ApiService {
             return Object.values(response.data);
         });
     }
-    searchShows(params) {
-        let that = this;
-        if(!params.search){
-            throw new Error('Missing search');
-        }
-        that.request.url = `${this.url}/search/shows?q=${params.search}`;
-        return axios(that.request).then((response) => {
-            return response.data;
-        });
-    };
 };

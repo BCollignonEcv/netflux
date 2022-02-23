@@ -9,8 +9,9 @@ export const useShowStore = defineStore({
         searchHistory: [],
         search: '',
         shows: {
-            searchResults: [],
+            all: [],
             news: [],
+            searchResults: [],
         },
     }),
     getters: {
@@ -47,20 +48,24 @@ export const useShowStore = defineStore({
     actions: {
         initShows(){
             this.requestNews();
+            this.requestShows();
         },
         newSearch(newSearch){
             if(newSearch != '' && newSearch != this.search){
                 this.search = newSearch;
                 this.searchHistory.push(newSearch);
-                this.requestSearch();
+                this.requestSearchShows();
             }
         },
         async requestNews(){
             this.shows.news = await ApiServiceInstance.getShowsNews();
         },
-        async requestSearch(urlSearch = null){
+        async requestShows(){
+            this.shows.all = await ApiServiceInstance.getShows();
+        },
+        async requestSearchShows(urlSearch = null){
             let search = urlSearch ? urlSearch : this.search;
-            this.shows.searchResults = await ApiServiceInstance.searchShows({ search: search});
+            this.shows.searchResults = await ApiServiceInstance.getShows({ search: search});
         }
     }
 })
