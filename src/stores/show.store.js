@@ -25,6 +25,9 @@ export const useShowStore = defineStore({
         getShows: (state) => { 
             return state.shows ;
         },
+        getShow: (state) => { 
+            return state.shows.show ;
+        },
         getSearchResults: (state) => { 
             return state.shows.searchResults ;
         },
@@ -46,6 +49,9 @@ export const useShowStore = defineStore({
     actions: {
         initShows(){
             this.requestShows();
+        },
+        initShow(id){
+            this.requestShow(id);
         },
         newSearch(newSearch){
             if(newSearch != '' && newSearch != this.search){
