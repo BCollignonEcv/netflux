@@ -23,6 +23,9 @@ export default {
     },
     computed:{},
     mounted(){
+        if(Object.keys(this.shows).length){
+            this.show = this.shows[this.index]
+        }
         this.startCarrousel();
     },
     methods:{
