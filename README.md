@@ -5,12 +5,12 @@ Groupe : Gautier Maire | Vincent Manach | Baptiste Collignon
 
 ## TODO 
 
-- Homepage :
-- Recherche :
-    - results :
-- Show :
-    - Epidodes :
-- Commentaire :
+- Homepage : Baptiste
+- Recherche : Baptiste
+    - results : Baptiste
+- Show : Gautier
+    - Epidodes : Vincent
+- Commentaire : ???
 
 ## Project Setup
 
