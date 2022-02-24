@@ -1,6 +1,16 @@
 # netflux
 
+Render : https://bcollignonecv.github.io/netflux/
 Groupe : Gautier Maire | Vincent Manach | Baptiste Collignon
+
+## TODO 
+
+- Homepage : Baptiste
+- Recherche : Baptiste
+    - results : Baptiste
+- Show : Gautier
+    - Epidodes : Vincent
+- Commentaire : ???
 
 ## Project Setup
 

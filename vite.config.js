@@ -10,5 +10,15 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+  base: '/netflux/',
+    css: {
+        preprocessorOptions: {
+          scss: {
+            additionalData: `
+            @import "@/assets/mixins.scss";
+            `
+          }
+        }
+      }
 })
