@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <div class="header-navigation left">
-      <RouterLink to="/">Netflux Logo</RouterLink>
+      <RouterLink to="/">
+        <img class="header-navigation__logo" src="@/assets/logo_netflux.png" alt="Logo Netflux">
+      </RouterLink>
       <nav>
         <ul>
           <li><RouterLink to="/">Home</RouterLink></li>
@@ -73,6 +75,13 @@ export default {
       padding-right: var(--m-3);
     }
   }
+}
+
+.header-navigation__logo {
+  max-height: 50px;
+  max-width: 140px;
+  object-fit: contain;
+  vertical-align: middle;
 }
 
 </style>
