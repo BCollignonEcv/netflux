@@ -83,7 +83,7 @@ export default {
         .content{
             width: 50%;
             position: absolute;
-            top: 50%;
+            bottom: 25%;
             left: 10%;
 
             .title{
