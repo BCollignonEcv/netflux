@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500&display=swap');
+
 :root{
   font-size: 16px;
+  line-height: 20px;
 
   --c-neutral: #fff;
   --c-primary: #b9090b;
@@ -26,9 +29,18 @@
 }
 
 html{
+<<<<<<< HEAD
   font-family: Helvetica Neue, Arial, sans-serif;
   background-color: var(--c-tertiary);
   color: var(--c-neutral);
+=======
+  font-family: 'Inter', Helvetica Neue, Arial, sans-serif;
+}
+
+body, div, p, span, button, a {
+  font-size: 16px;
+  line-height: 22px;
+>>>>>>> 8bec440 (Fix base style + add font Inter + show banner + show infos)
 }
 
 a{

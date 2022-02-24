@@ -3,9 +3,9 @@
     <Section>
       <ShowBanner :show="showStore.getShow" />
     </Section>
-    <!-- <Section :height="'landing'">
-      
-    </Section> -->
+    <Section :height="'landing'">
+      <ShowInfos :show="showStore.getShow" />
+    </Section>
   </div>
 </template>
 
@@ -15,12 +15,14 @@ import { useRoute } from 'vue-router';
 import { useShowStore } from '@/stores/show.store';
 import Section from '@/components/layer.components/Section.layer.vue';
 import ShowBanner from '@/components/show.components/ShowBanner.vue';
+import ShowInfos from '@/components/show.components/ShowInfos.vue';
 
 export default {
   name: 'Show',
   components: {
     Section,
-    ShowBanner
+    ShowBanner,
+    ShowInfos
   },
   setup() {
     const route = useRoute();
