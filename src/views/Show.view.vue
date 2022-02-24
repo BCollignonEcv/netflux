@@ -11,11 +11,6 @@
 
 <script>
 
-//=== TODO
-// - request all images of this show > 'https://api.tvmaze.com/shows/32796/images'
-// - if image type background (width:1920/height:1080) > show component 'ShowBanner'
-// - else if image original > show component 'ShowCenteredImage' 
-
 import { useRoute } from 'vue-router';
 import { useShowStore } from '@/stores/show.store';
 import Section from '@/components/layer.components/Section.layer.vue';
@@ -45,5 +40,6 @@ export default {
 <style scoped>
   .show__container {
     min-height: 80vh;
+    background-color: var(--c-tertiary);
   }
 </style>
