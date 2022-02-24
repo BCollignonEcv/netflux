@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500&display=swap');
+
 :root{
   font-size: 16px;
+  line-height: 20px;
 
   --c-neutral: #fff;
   --c-primary: #fff;
@@ -26,7 +29,12 @@
 }
 
 html{
-  font-family: Helvetica Neue, Arial, sans-serif;
+  font-family: 'Inter', Helvetica Neue, Arial, sans-serif;
+}
+
+body, div, p, span, button, a {
+  font-size: 16px;
+  line-height: 22px;
 }
 
 a{

@@ -25,7 +25,7 @@ export default class ApiService {
         if(!params.id){
             throw new Error('Missing ID');
         }
-        that.request.url = `${this.url}/shows/${params.id}`;
+        that.request.url = `${this.url}/shows/${params.id}?embed=cast`;
         return axios(that.request).then((response) => {
             return response.data;
         });

@@ -12,10 +12,12 @@ export default {
         
     },
 }
+
 </script>
+
 <template>
     <div v-if="show !== undefined && show.image !== undefined && show.image.original !== undefined" class="show__banner">
-        <img class="show__banner-img" :src="show.image.original" alt="">
+        <img class="show__banner-img" :src="show.image.original" alt="Show banner image">
         <div class="show__banner-overlay"></div>
     </div>
 </template>
