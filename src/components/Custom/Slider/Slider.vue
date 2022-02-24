@@ -29,6 +29,7 @@ export default {
     },
 }
 </script>
+
 <template>
   <div class="shows-list">
       <h2 v-if="title && hasShows">{{title}}</h2>

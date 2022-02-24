@@ -7,54 +7,33 @@ export default class ApiService {
             method: 'get',
             url: this.url,
         };
+        this.apiEndpoints = {
+            GET_SHOWS:             '/shows',
+            GET_SHOW:              '/show/{0}',
+            GET_SHOW_AND_EPISODES: '/show/{0}?embed=episodes',
+            GET_EPISODE:           '/shows/{0}/episodebynumber?season={1}&number={2}',
+            SEARCH_SHOWS:          '/search/shows?q={0}',
+        }
     }
-    getShows(params = null) {
+    get(endpoint, params = {}) {
         let that = this;
-        that.request.url = `${this.url}/shows`;
-
-        if(params && params.search){
-            that.request.url = `${this.url}/search/shows?q=${params.search}`;
-        } 
-
+        let url = this.url + endpoint;
+        that.request.url = feedRequestUrl(url, params);
         return axios(that.request).then((response) => {
             return response.data;
         });
     };
-    getShowByID(params) {
-        let that = this;
-        if(!params.id){
-            throw new Error('Missing ID');
-        }
-        that.request.url = `${this.url}/shows/${params.id}`;
-        return axios(that.request).then((response) => {
-            return response.data;
-        });
-    };
-    getShowEpisodes(params) {
-        let that = this;
-        if(!params.show.id){
-            throw new Error('Missing show ID');
-        }
-        that.request.url = `${this.url}/shows/${params.show.id}/episodes`;
-        return axios(that.request).then((response) => {
-            return response.data;
-        });
-    };
-    getShowWithEpisodes(params) {
-        let that = this;
-        if(!params.show.id){
-            throw new Error('Missing show ID');
-        }
-        that.request.url = `${this.url}/shows/${params.show.id}?embed=episodes`;
-        return axios(that.request).then((response) => {
-            return response.data;
-        });
-    };
-    getShowsNews(){
-        let that = this;
-        that.request.url = `${this.url}/updates/shows?since=day`;
-        return axios(that.request).then((response) => {
-            return Object.values(response.data);
-        });
-    }
 };
+
+function feedRequestUrl(url, params){
+    let paramsRequired = url.match(/{\d}/)
+    if(paramsRequired){
+        if(paramsRequired.length != Object.keys(params).length){
+            throw new Error('api.service - Missing request params');
+        }
+        paramsRequired.forEach((value, index) => {
+            url = url.replace(value, params[index])
+        });  
+    }
+    return url;
+}

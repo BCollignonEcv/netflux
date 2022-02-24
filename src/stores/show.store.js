@@ -1,53 +1,52 @@
 import { defineStore } from 'pinia'
 import ApiService from '@/services/api.service.js'
 
-const ApiServiceInstance = new ApiService()
+const API = new ApiService()
 
 export const useShowStore = defineStore({
     id: 'show',
     state: () => ({
+        shows: [],
+        show: [],
+        episode : [],
+        searchedShows: [],
         searchHistory: [],
         search: '',
-        shows: {
-            all: [],
-            show: {},
-            episode : {},
-            searchResults: [],
-        },
     }),
     getters: {
+        getShows: (state) => { 
+            return state.shows ;
+        },
+        getShow: (state) => {
+            return state.show ;
+        },
+        getShowsHightLight: (state) => {
+            return state.shows.slice(0,10);
+        },
+        getShowsExeptHightLight: (state) => {
+            return state.shows.slice(10,50);
+        },
         getCurrentSearch: (state) => { 
             return state.search ;
         },
         getSearchHistory: (state) => { 
             return state.searchHistory ;
         },
-        getShows: (state) => { 
-            return state.shows ;
+        getSearchedShows: (state) => { 
+            return state.searchedShows ;
         },
-        getSearchResults: (state) => { 
-            return state.shows.searchResults ;
-        },
-        getLastSearch: (state) => {
-            if(state.searchHistory.length > 1){
-                return {
-                    success: true,
-                    search: state.searchHistory[state.searchHistory.length-2],
-                    message: ''
-                }
-            }else{
-                return {
-                    success: false,
-                    message: 'Empty History'
-                }
-            }
-        },
+        hasSearch: (state) => {
+            return state.search != '';
+        }
     },
     actions: {
         initShows(){
-            this.requestShows();
+            console.log(this.shows.length)
+            if(this.shows.length < 1) {
+                this.requestShows();
+            }
         },
-        newSearch(newSearch){
+        searchShows(newSearch){
             if(newSearch != '' && newSearch != this.search){
                 this.search = newSearch;
                 this.searchHistory.push(newSearch);
@@ -55,14 +54,19 @@ export const useShowStore = defineStore({
             }
         },
         async requestShows(){
-            this.shows.all = await ApiServiceInstance.getShows();
+            this.shows = await API.get(API.apiEndpoints.GET_SHOWS);
         },
         async requestShow(id){
-            this.shows.show = await ApiServiceInstance.getShowByID({ id: id});
+            this.show = await API.get(API.apiEndpoints.GET_SHOW, { 0: id});
         },
-        async requestSearchShows(urlSearch = null){
-            let search = urlSearch ? urlSearch : this.search;
-            this.shows.searchResults = await ApiServiceInstance.getShows({ search: search});
+        async requestShowWithEpisodes(id){
+            this.show = await API.get(API.apiEndpoints.GET_SHOW_AND_EPISODES, { 0: id});
+        },
+        async requestEpisode(id, saison, episode){
+            this.episode = await API.get(API.apiEndpoints.GET_SHOW_AND_EPISODES, { 0: id, 1: saison, 2: episode});
+        },
+        async requestSearchShows(search){
+            this.searchedShows = await API.get(API.apiEndpoints.SEARCH_SHOWS, { 0: search});
         }
     }
 })

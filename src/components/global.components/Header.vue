@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     newSearch(e){
-      this.showStore.newSearch(e);
+      this.showStore.requestSearchShows(e);
       this.$router.push({name: 'shows'})
     }
   }

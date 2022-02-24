@@ -11,12 +11,12 @@
     }
 
     @if $color == 'secondary' {
-        background-color: var(--c-secondary);
-        color: var(--c-neutral);
+        background-color: var(--c-neutral);
+        color: var(--c-tertiary);
     }
 
     @if $color == 'tertiary' {
-        background-color: var(--c-tertiary);
+        background-color: var(--c-secondary);
         color: var(--c-neutral);
     }
 
@@ -27,6 +27,11 @@
 
     @if $color == 'error' {
         background-color: var(--c-error);
+        color: var(--c-neutral);
+    }
+
+    @if $color == 'active' {
+        background-color: var(--c-primary);
         color: var(--c-neutral);
     }
 }
