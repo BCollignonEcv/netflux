@@ -8,7 +8,7 @@
 import { useRoute } from 'vue-router'
 import { useShowStore } from '@/stores/show.store'
 import Section from '@/components/layer.components/Section.layer.vue'
-import EpisodeItem from '@/components/episode.component/EpisodeItem.vue'
+import EpisodeItem from '@/components/Custom/Episode/EpisodeItem.vue'
 
 export default {
   name: 'Episode',
@@ -25,8 +25,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
   .landing {
     padding: 0;
+    background-color: var(--c-tertiary);
   }
 </style>
