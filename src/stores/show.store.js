@@ -54,7 +54,7 @@ export const useShowStore = defineStore({
         initShowWithEpisodes(id) {
             this.requestShowWithEpisodes(id);
         },
-        newSearch(newSearch) {
+        searchShows(newSearch) {
             if (newSearch != '' && newSearch != this.search) {
                 this.search = newSearch;
                 this.searchHistory.push(newSearch);
@@ -63,9 +63,6 @@ export const useShowStore = defineStore({
         },
         async requestShows() {
             this.shows = await API.get(API.apiEndpoints.GET_SHOWS);
-        },
-        async requestEpisode(id) {
-            this.episode = await ApiServiceInstance.getEpisodeByID({ id: id });
         },
         async requestShow(id) {
             this.show = await API.get(API.apiEndpoints.GET_SHOW, { 0: id });
@@ -78,6 +75,6 @@ export const useShowStore = defineStore({
         },
         async requestSearchShows(search) {
             this.searchedShows = await API.get(API.apiEndpoints.SEARCH_SHOWS, { 0: search });
-        },
+        }
     }
 })

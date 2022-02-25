@@ -81,9 +81,9 @@ export default {
     transition: all 200ms ease-in-out;
 
     .filter{
+        @include customColor($color: 'filter');
         position: relative;
         height: inherit;
-        background: linear-gradient(180deg, rgba(200,200,200,0.2) 0%, var(--c-tertiary) 100%);
         .content{
             width: 50%;
             position: absolute;

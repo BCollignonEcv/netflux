@@ -30,10 +30,10 @@ export default {
     <Landing :shows="showStore.getShowsHightLight"></Landing>    
   </Section>
   <Section :padding="true" :overlay="true">
-        <Slider :title="'HightLigth'" :shows="showStore.getShowsHightLight"/>
+    <Slider :title="'HightLigth'" :shows="showStore.getShowsHightLight"/>
   </Section>
   <Section :padding="true">
-        <Slider :title="'All'" :shows="showStore.getShowsExeptHightLight"/>
+    <Slider :title="'All shows'" :shows="showStore.getShowsExeptHightLight"/>
   </Section>
     <!-- <Section>
     <transition>

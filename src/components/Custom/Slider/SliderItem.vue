@@ -1,12 +1,24 @@
 <template>
     <div class="slider-item">
-        <div class="card-show" @mouseenter="hover = true" @mouseleave="hover = false">
+        <div class="card-show" @mouseenter="hovered" @mouseleave="hovered">
             <figure>
                 <img v-if="hasImg" :src="formatedShow.image.medium" alt="" srcset="" @click="$router.push(`/show/${formatedShow.id}`)">
                 <img v-else class="empty-img" @click="$router.push(`/show/${show.id}`)" >
-                <!-- <figcaption v-if="hover && !wishlistDisabled" class="card-show-description">
-                    <HeartIcon v-if="!wishlistDisabled" title="Add to my list" @click="addToMyList"/>
-                </figcaption> -->
+                <figcaption v-if="hover" class="card-show-description">
+                    <div class="left">
+                        <p v-if="show.name">{{show.name}}</p>
+                        <p v-if="show.date">{{show.date}}</p>
+                    </div>
+                    <div class="right"> 
+                        <template v-if="wishlist">
+                            <button @click="toggleFromMyList">
+                                <HeartIcon v-if="isWhishlisted" fillColor="red"  title="Remove from my list" />
+                                <HeartIcon v-else fillColor="white" title="Add to my list"/>
+                            </button>
+                        </template>
+                        <p v-if="show.rating" >{{show.rating.average}}</p>
+                    </div>
+                </figcaption>
             </figure>
         </div>
     </div>
@@ -21,10 +33,20 @@ export default {
     components: {
         HeartIcon
     },
-    props: ['wishlistDisabled', 'show'],
+    props: {
+        wishlist: Boolean,
+        show: {
+            type: Object,
+            default: {
+                name: "Empty",
+                image: null,
+            }
+        }
+    },
     data(){
         return {
             hover: false,
+            isWhishlisted: false,
         }
     },
     computed: {
@@ -38,61 +60,63 @@ export default {
                 }
             }
             return false; 
-        }
+        },
     },
     setup() {
         const userStore = useUserStore();
         return { userStore }
     },
     methods: {
-        addToMyList(){
-            this.userStore.addShow(this.show)
-        }
+        hovered(){
+            this.hover = !this.hover;
+            if(this.hover){
+                this.isWhishlisted = this.userStore.hasShow(this.show.id);
+            }
+        },
+        toggleFromMyList(){
+            if(this.isWhishlisted){
+                this.isWhishlisted = false;
+                this.userStore.removeShow(this.show)
+            }else{
+                this.isWhishlisted = true;
+                this.userStore.addShow(this.show)
+            }
+        },
     }   
 }
 </script>
 
 <style lang="scss" scoped>
 
-$height: 295px;
-$width: 210px;
-    .slider-item{
-        position: relative;
-        min-height: $height;
-        min-width: $width;
-        .card-show {
-            cursor: pointer;
-            &:hover{
-                transform: scale(1.2);
-                position: absolute;
-                z-index: 5;
-            }
+.card-show{
+    cursor: pointer;
+    position: relative;
 
-            figure{
-                img{
-                    height: 100%;
+    img{
+        width: 100%;
+    }
 
-                    &.empty-img{
-                        width: $width;
-                        height: $height;
-                        background-color: var(--c-tertiary)
-                    }
-                }
+    .card-show-description{
+        @include customFlex($mode: 'extend');
+        @include customColor($color: 'filter');
+        align-items: flex-end;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        box-sizing: border-box;
+        width: 100%;
+        height: 50%;
+        padding: 10px;
+        font-weight: bold;
 
-                figcaption{
-                    @include customFlex($mode: 'extend');
-                    align-items: center;
-                    position: absolute;
-                    bottom: 0;
-                    width: 100%;
-                }
-            }
+        .left{
+                text-align: left;
+        }
 
-            .card-show-description{
-                @include customColor($color: 'primary');
-                @include customFlex();
-                padding: var(--m-3)
-            }
+        .right{
+            text-align: right;
         }
     }
+}
+
 </style>
