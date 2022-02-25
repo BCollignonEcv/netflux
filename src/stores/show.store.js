@@ -42,10 +42,16 @@ export const useShowStore = defineStore({
                 }
             }
         },
+        getEpisode: (state) => { 
+            return state.shows.episode ;
+        },
     },
     actions: {
         initShows(){
             this.requestShows();
+        },
+        initEpisode(id) {
+            this.requestEpisode(id);
         },
         newSearch(newSearch){
             if(newSearch != '' && newSearch != this.search){
@@ -56,6 +62,9 @@ export const useShowStore = defineStore({
         },
         async requestShows(){
             this.shows.all = await ApiServiceInstance.getShows();
+        },
+        async requestEpisode(id){
+            this.shows.episode = await ApiServiceInstance.getEpisodeByID({ id: id}); 
         },
         async requestShow(id){
             this.shows.show = await ApiServiceInstance.getShowByID({ id: id});

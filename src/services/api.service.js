@@ -56,5 +56,17 @@ export default class ApiService {
         return axios(that.request).then((response) => {
             return Object.values(response.data);
         });
-    }
+    };
+    getEpisodeByID(params){
+        let that = this;
+        if(!params.id){
+            console.log(params)
+            throw new Error('Missing episode ID');
+        }
+        that.request.url = `${this.url}/episodes/${params.id}`; 
+        return axios(that.request).then((response) => {
+            console.log(response.data);
+            return response.data;
+        });
+    };
 };
