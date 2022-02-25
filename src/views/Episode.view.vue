@@ -1,33 +1,32 @@
 <template>
   <Section :height="'landing'">
-    <div class="show">
-
-    </div>
+    <EpisodeItem :episode="showStore.getEpisode"/>
   </Section>
 </template>
 
 <script>
+import { useRoute } from 'vue-router'
 import { useShowStore } from '@/stores/show.store'
 import Section from '@/components/layer.components/Section.layer.vue'
+import EpisodeItem from '@/components/episode.component/EpisodeItem.vue'
 
 export default {
   name: 'Episode',
   components: {
-    Section
-  },
-  props: {
-    show: {
-      type: String,
-      default: ''
-    }
+    Section, EpisodeItem
   },
   setup() {
+    const route = useRoute();
     const showStore = useShowStore();
+    const id = route.params.id;
+    showStore.initEpisode(id);
     return { showStore }
   },
 }
 </script>
 
-<style>
-
+<style scoped>
+  .landing {
+    padding: 0;
+  }
 </style>
