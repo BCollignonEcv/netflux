@@ -25,8 +25,10 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
   .landing {
     padding: 0;
+    background-color: var(--c-tertiary);
   }
 </style>

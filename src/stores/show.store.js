@@ -21,7 +21,7 @@ export const useShowStore = defineStore({
             return state.show;
         },
         getEpisode: (state) => {
-            return state.shows.episode;
+            return state.episode;
         },
         getShowsHightLight: (state) => {
             return state.shows.slice(0, 10);
@@ -66,7 +66,7 @@ export const useShowStore = defineStore({
             this.shows = await API.get(API.apiEndpoints.GET_SHOWS);
         },
         async requestEpisode(id) {
-            this.shows.episode = await ApiServiceInstance.getEpisodeByID({ id: id });
+            this.episode = await ApiServiceInstance.getEpisodeByID({ id: id });
         },
         async requestShow(id) {
             this.show = await API.get(API.apiEndpoints.GET_SHOW, { 0: id });
