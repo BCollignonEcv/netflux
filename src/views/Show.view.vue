@@ -6,6 +6,9 @@
     <Section :height="'landing'">
       <ShowInfos :show="showStore.getShow" />
     </Section>
+    <Section :height="'landing'">
+      <ShowComments :show="showStore.getShow" />
+    </Section>
   </div>
 </template>
 
@@ -16,13 +19,15 @@ import { useShowStore } from '@/stores/show.store';
 import Section from '@/components/layer.components/Section.layer.vue';
 import ShowBanner from '@/components/show.components/ShowBanner.vue';
 import ShowInfos from '@/components/show.components/ShowInfos.vue';
+import ShowComments from '@/components/show.components/ShowComments.vue';
 
 export default {
   name: 'Show',
   components: {
     Section,
     ShowBanner,
-    ShowInfos
+    ShowInfos,
+    ShowComments
   },
   setup() {
     const route = useRoute();
