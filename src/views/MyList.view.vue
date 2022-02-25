@@ -1,5 +1,5 @@
 <template>
-  <Section :height="'landing'">
+  <Section :height="'landing'" :padding="true">
     <h1>My list</h1>
     <transition>
       <template v-if="userStore.hasOneShow">
