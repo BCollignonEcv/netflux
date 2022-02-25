@@ -51,9 +51,12 @@ export const useShowStore = defineStore({
         initEpisode(id) {
             this.requestEpisode(id);
         },
+<<<<<<< HEAD
         initShowWithEpisodes(id) {
             this.requestShowWithEpisodes(id);
         },
+=======
+>>>>>>> 9fa19b8 (add slider)
         newSearch(newSearch) {
             if (newSearch != '' && newSearch != this.search) {
                 this.search = newSearch;
@@ -64,9 +67,12 @@ export const useShowStore = defineStore({
         async requestShows() {
             this.shows = await API.get(API.apiEndpoints.GET_SHOWS);
         },
+<<<<<<< HEAD
         async requestEpisode(id) {
             this.episode = await ApiServiceInstance.getEpisodeByID({ id: id });
         },
+=======
+>>>>>>> 9fa19b8 (add slider)
         async requestShow(id) {
             this.show = await API.get(API.apiEndpoints.GET_SHOW, { 0: id });
         },
