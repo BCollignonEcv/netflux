@@ -40,6 +40,16 @@ export default class ApiService {
             return response.data;
         });
     };
+    getShowEpisodesByID(params) {
+        let that = this;
+        if(!params.id){
+            throw new Error('Missing show ID');
+        }
+        that.request.url = `${this.url}/shows/${params.id}/episodes`;
+        return axios(that.request).then((response) => {
+            return response.data;
+        });
+    };
     getShowWithEpisodes(params) {
         let that = this;
         if(!params.show.id){

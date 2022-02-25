@@ -11,6 +11,7 @@ export const useShowStore = defineStore({
         shows: {
             all: [],
             show: {},
+            showEpisodes: [],
             episode : {},
             searchResults: [],
         },
@@ -27,6 +28,9 @@ export const useShowStore = defineStore({
         },
         getShow: (state) => { 
             return state.shows.show ;
+        },
+        getShowEpisodes: (state) => { 
+            return state.shows.showEpisodes ;
         },
         getSearchResults: (state) => { 
             return state.shows.searchResults ;
@@ -53,6 +57,9 @@ export const useShowStore = defineStore({
         initShow(id){
             this.requestShow(id);
         },
+        initShowEpisodes(id){
+            this.requestShowEpisodes(id);
+        },
         newSearch(newSearch){
             if(newSearch != '' && newSearch != this.search){
                 this.search = newSearch;
@@ -65,6 +72,9 @@ export const useShowStore = defineStore({
         },
         async requestShow(id){
             this.shows.show = await ApiServiceInstance.getShowByID({ id: id});
+        },
+        async requestShowEpisodes(id){
+            this.shows.showEpisodes = await ApiServiceInstance.getShowEpisodesByID({ id: id});
         },
         async requestSearchShows(urlSearch = null){
             let search = urlSearch ? urlSearch : this.search;
