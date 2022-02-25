@@ -124,7 +124,7 @@ export default {
         margin: 32px auto 16px auto;
         padding: 16px 32px;
         border-radius: 6px;
-        background-color: var(--c-primary);
+        background-color: var(--c-neutral);
         font-weight: 600;
         color: var(--c-tertiary);
         cursor: pointer;

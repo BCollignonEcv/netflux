@@ -41,11 +41,10 @@ export default {
         position: relative;
         width: 900px;
         max-width: 90%;
-        margin: -120px auto 60px auto;
+        margin: 0 auto 60px auto;
         padding: 32px;
         background-color: #1a1a1a;
         border-radius: 6px;
-        color: var(--c-primary);
     }
 
     .show__comments-title {
