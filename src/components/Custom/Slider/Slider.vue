@@ -17,10 +17,13 @@ export default {
     props: {
         title: String, 
         shows: Object,
+<<<<<<< HEAD
         wishlist: {
             type: Boolean,
             default: true
         },
+=======
+>>>>>>> 78842f3439c1333d7af3fdab2f87118eedb6f9f6
     },
     setup(){
         return {
