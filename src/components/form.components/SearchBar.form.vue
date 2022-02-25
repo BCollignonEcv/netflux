@@ -1,14 +1,17 @@
 <template>
-  <transition name="switch" mode="out-in">
-    <template v-if="active">
-      <form action="" @submit.prevent="userSearch()">
-        <input type="text" name="" id="" v-model="search" placeholder="Search" @mouseleave="isOnSearch">
-      </form>
-    </template>
-    <template v-else>
-        <MagnifyIcon :size="18" @click="active = true" @mouseover="active = true"/>
-    </template>
-  </transition>
+  <div class="searchBar">
+    <transition name="switch" mode="out-in">
+        <template v-if="active">
+          <form action="" @submit.prevent="userSearch()" class="form">
+            <input type="text" name="" id="" v-model="search" placeholder="Search" @mouseleave="isOnSearch" class="input-search">
+            <button type="submit" class="btn-submit"><MagnifyIcon :size="18"/></button>
+          </form>
+        </template>
+        <template v-else>
+            <MagnifyIcon :size="24" @click="active = true" @mouseover="active = true"/>
+        </template>
+      </transition>
+  </div>
 </template>
 
 <script>
@@ -42,12 +45,26 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 
+.searchBar{
+
+  .form{
+    border-radius: 15px;
+    padding: 5px 15px;
+    background: var(--c-neutral);
+    .input-search{
+      color: var(--c-tertiary)
+    }
+
+    .btn-submit{
+      cursor: pointer;
+    }
+  }
+}
 .switch-enter-active{
   transition: all 0.25s ease-out;
 }
-
 
 .switch-leave-active {
   transition: all 0.1s ease-out;

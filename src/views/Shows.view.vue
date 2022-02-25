@@ -1,14 +1,16 @@
 <template>
-  <Section :height="'landing'">
-  <div class="shows">
-      <h1>This is an shows page</h1>
-  </div>
-  <Slider :title="'Search'" :shows="showStore.getSearchResults" :options="{scrollabled: false}"/>
+  <Section :height="'landing'" :padding="true">
+    <template v-if="userStore.hasOneShow">
+      <Slider :title="'My list'" :shows="userStore.getShowsList"/>
+    </template>
+    <Slider :title="'Search'" :shows="showStore.getSearchedShows"/>
+    <Slider :title="'All'" :shows="showStore.getShows"/>
   </Section>
 </template>
 
 <script>
 import { useShowStore } from '@/stores/show.store'
+import { useUserStore } from '@/stores/user.store'
 import Section from '@/components/layer.components/Section.layer.vue'
 import Slider from '@/components/Custom/Slider/Slider.vue'
 
@@ -19,7 +21,9 @@ export default {
   },
   setup() {
     const showStore = useShowStore();
-    return { showStore }
+    const userStore = useUserStore();
+    showStore.initShows();
+    return { showStore, userStore }
   },
 }
 </script>

@@ -8,19 +8,46 @@ export default {
     components: {
       RouterView, Header, Footer
     },
-    props: {}
+    props: {},
+    data(){
+      return{
+        onDesktop: null,
+      }
+    },
+    created() {
+      this.checkDevice()
+      window.addEventListener("resize", this.checkDevice);
+    },
+    methods: {
+      checkDevice(e) {
+        this.onDesktop = screen.width >= 760;
+      }
+    }
 }
 </script>
 
 <template>
-  <Header></Header>
-  <main>
-    <RouterView />
-  </main>
-  <Footer></Footer>
+  <template v-if="onDesktop">
+    <Header></Header>
+    <main>
+      <RouterView />
+    </main>
+    <Footer></Footer>
+  </template>
+  <template v-else>
+    <div class="mobile">
+      <h1>This app is not available on mobile device or small screen</h1>
+    </div>
+  </template>
 </template>
 
-<style>
+<style lang="scss">
 @import '@/assets/reset.scss';
 @import '@/assets/base.scss';
+
+.mobile {
+  margin-top: 48vh;
+  padding: 12px;
+  text-align: center;
+}
 </style>

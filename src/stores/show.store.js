@@ -1,84 +1,80 @@
 import { defineStore } from 'pinia'
 import ApiService from '@/services/api.service.js'
 
-const ApiServiceInstance = new ApiService()
+const API = new ApiService()
 
 export const useShowStore = defineStore({
     id: 'show',
     state: () => ({
+        shows: [],
+        show: [],
+        episode: [],
+        searchedShows: [],
         searchHistory: [],
         search: '',
-        shows: {
-            all: [],
-            show: {},
-            showEpisodes: [],
-            episode : {},
-            searchResults: [],
-        },
     }),
     getters: {
-        getCurrentSearch: (state) => { 
-            return state.search ;
+        getShows: (state) => {
+            return state.shows;
         },
-        getSearchHistory: (state) => { 
-            return state.searchHistory ;
+        getShow: (state) => {
+            return state.show;
         },
-        getShows: (state) => { 
-            return state.shows ;
+        getEpisode: (state) => {
+            return state.episode;
         },
-        getShow: (state) => { 
-            return state.shows.show ;
+        getShowsHightLight: (state) => {
+            return state.shows.slice(0, 10);
         },
-        getShowEpisodes: (state) => { 
-            return state.shows.showEpisodes ;
+        getShowsExeptHightLight: (state) => {
+            return state.shows.slice(10, 50);
         },
-        getSearchResults: (state) => { 
-            return state.shows.searchResults ;
+        getCurrentSearch: (state) => {
+            return state.search;
         },
-        getLastSearch: (state) => {
-            if(state.searchHistory.length > 1){
-                return {
-                    success: true,
-                    search: state.searchHistory[state.searchHistory.length-2],
-                    message: ''
-                }
-            }else{
-                return {
-                    success: false,
-                    message: 'Empty History'
-                }
-            }
+        getSearchHistory: (state) => {
+            return state.searchHistory;
         },
+        getSearchedShows: (state) => {
+            return state.searchedShows;
+        },
+        hasSearch: (state) => {
+            return state.search != '';
+        }
     },
     actions: {
-        initShows(){
-            this.requestShows();
+        initShows() {
+            if (this.shows.length < 1) {
+                this.requestShows();
+            }
         },
-        initShow(id){
-            this.requestShow(id);
+        initEpisode(id) {
+            this.requestEpisode(id);
         },
-        initShowEpisodes(id){
-            this.requestShowEpisodes(id);
+        initShowWithEpisodes(id) {
+            this.requestShowWithEpisodes(id);
         },
-        newSearch(newSearch){
-            if(newSearch != '' && newSearch != this.search){
+        searchShows(newSearch) {
+            if (newSearch != '' && newSearch != this.search) {
                 this.search = newSearch;
                 this.searchHistory.push(newSearch);
                 this.requestSearchShows();
             }
         },
-        async requestShows(){
-            this.shows.all = await ApiServiceInstance.getShows();
+        async requestShows() {
+            this.shows = await API.get(API.apiEndpoints.GET_SHOWS);
         },
-        async requestShow(id){
-            this.shows.show = await ApiServiceInstance.getShowByID({ id: id});
+        async requestShow(id) {
+            this.show = await API.get(API.apiEndpoints.GET_SHOW, { 0: id });
         },
-        async requestShowEpisodes(id){
-            this.shows.showEpisodes = await ApiServiceInstance.getShowEpisodesByID({ id: id});
+        async requestShowWithEpisodes(id) {
+            this.show = await API.get(API.apiEndpoints.GET_SHOW_AND_EPISODES, { 0: id });
         },
-        async requestSearchShows(urlSearch = null){
-            let search = urlSearch ? urlSearch : this.search;
-            this.shows.searchResults = await ApiServiceInstance.getShows({ search: search});
+        async requestEpisode(id) {
+            this.episode = await API.get(API.apiEndpoints.GET_EPISODE, { 0: id });
+        },
+        async requestSearchShows(search) {
+            this.searchedShows = await API.get(API.apiEndpoints.SEARCH_SHOWS, { 0: search });
         }
     }
 })

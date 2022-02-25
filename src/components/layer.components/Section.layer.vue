@@ -31,6 +31,14 @@ export default {
         height: {
             type: [String, Number],
             default: 'Default'
+        },
+        padding: {
+            type: [Boolean],
+            default: false,
+        },
+        overlay: {
+            type: [Boolean],
+            default: false,
         }
     },
     data () {
@@ -38,7 +46,7 @@ export default {
             allowedClass: {
                 backgroundColor: ['Default', 'primary', 'secondary'],
                 type: ['Default', 'splited'],
-                height: ['Default', 'fullHeight', 'landing', '75', '66', '50', '33'],
+                height: ['Default', 'fullHeight', 'landing'],
             }
         }
     },
@@ -52,6 +60,8 @@ export default {
                     }
                 }
             }
+            this.padding ? customClassObject.push('p1') : null
+            this.overlay ? customClassObject.push('overlay') : null
             return customClassObject;
         }
     },
@@ -63,14 +73,29 @@ export default {
 <style lang="scss">
 
 section {
+    height: auto;
+    position: relative;
+
     &.fullHeight{
         height: 100vh;
-        padding: var(--m-1);
     }
 
     &.landing{
-        min-height: 100vh;
-        padding: var(--m-1) var(--m-3);
+        height: calc(100vh - var(--header-size));
+    }
+
+    &.p1{
+        padding: var(--m-2) var(--m-2);
+    }
+
+    &.overlay{
+        margin-top: -10%;
+        margin-bottom: -5%;
+        z-index: 2;
+    }
+
+    &.primary{
+        @include customColor($color: 'primary')
     }
 
     &.splited {

@@ -1,22 +1,10 @@
 <script>
-import { useRoute } from 'vue-router';
-import { useShowStore } from '@/stores/show.store';
-import ShowEpisodes from '@/components/show.components/ShowEpisodes.vue';
+import ShowEpisodes from '@/components/Custom/Show/ShowEpisodes.vue';
 
 export default {
     name: 'ShowInfos',
     components: {
         ShowEpisodes
-    },
-    setup() {
-        const route = useRoute();
-        const showStore = useShowStore();
-
-        const id = route.params.id;
-
-        showStore.initShowEpisodes(id);
-
-        return { showStore };
     },
     props: {
         show: Object,
@@ -73,7 +61,7 @@ export default {
             </div>
         </div>
 
-        <ShowEpisodes :episodes="showStore.getShowEpisodes" />
+        <ShowEpisodes v-if="show !== undefined && show._embedded !== undefined && show._embedded.episodes != undefined" :episodes="show._embedded.episodes" />
         
     </div>
 </template>

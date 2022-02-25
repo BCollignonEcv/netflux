@@ -29,7 +29,7 @@ export default {
     <div class="show__infos-episodes">
         <h3 class="show__infos-episodes-title">Episodes</h3>
         <div class="show__infos-episodes-list" v-if="episodes !== undefined">
-            <div class="show__infos-episode" v-for="(episode, index) in episodes" v-bind:key="episode.id" :class="(episodeMaxShow > 0 && index < episodeMaxShow)?'active':(episodeMaxShow === 0)?'active':''">
+            <div class="show__infos-episode" v-for="(episode, index) in episodes" :key="episode.id" :class="(episodeMaxShow > 0 && index < episodeMaxShow)?'active':(episodeMaxShow === 0)?'active':''">
 
                 <RouterLink :to="{ name: 'episode', params: { id: episode.id }}" class="show__infos-episode-link">
                     <div v-if="episode !== undefined && episode.image !== undefined && episode.image.original !== undefined" class="show__infos-episode-wrap-img">
