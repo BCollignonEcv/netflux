@@ -11,10 +11,19 @@
                 <h1 class="title">{{episode.name}}</h1><br>
                 <p>S{{ episode.season }} • E{{ episode.number }}</p><br>
                 <div v-html="episode.summary"></div><br>
-                <p v-if="episode.rating.average" class="rate">{{episode.rating.average }}/10</p>
+                <p>{{ episode.runtime }} min</p>
+                <p v-if="episode.rating.average" class="rate">{{episode.rating.average }} / 10</p>
             </div>
         </div>
-    </div>
+        <div class="routerEp">
+            <RouterLink :to="'/episode/'+ prevEp" class="routerEp-btn">
+                Previous episode {{ episode.id-1 }}
+            </RouterLink>
+            <RouterLink :to="'/episode/'+ nextEp" class="routerEp-btn">
+                Next episode {{ episode.id+1 }}
+            </RouterLink>
+        </div>
+    </div>    
 </template>
 
 <script>
@@ -29,7 +38,10 @@ export default {
     episode: Object
   },
   data(){
-    return {}
+    return {
+        prevEp: this.episode.id - 1,
+        nextEp: this.episode.id + 1
+    }
   },
   mounted(){
   }
@@ -63,6 +75,7 @@ export default {
                 width: 100%;
                 height: 100%;
                 border-bottom-left-radius: 6px;
+                object-fit: cover;
             }
         }
         .description {
@@ -81,6 +94,7 @@ export default {
                 padding: 7px;
                 background-color: gray;
                 border-radius: 6px;
+                font-weight: bold;
             }
             p {
                 color: var(--c-neutral);
@@ -90,6 +104,28 @@ export default {
             }
             div p {
                 color: var(--c-neutral);
+            }
+        }
+    }
+    .routerEp {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        &-btn {
+            height: auto;
+            background-color: var(--c-neutral);
+            color: var(--c-tertiary);
+            border: 1px solid var(--c-neutral);
+            font-size: var(--fs-5);
+            padding: 15px;
+            margin: 0 20px;
+            border-radius: 6px;
+            transition: 300ms;
+            &:hover {
+                background-color: var(--c-tertiary);
+                color: var(--c-neutral);
+                border: 1px solid var(--c-neutral);
+                transition: 300ms;
             }
         }
     }
