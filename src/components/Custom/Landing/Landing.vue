@@ -78,6 +78,7 @@ export default {
     background-position: center;
     background-size: cover;
     height: calc(100vh - var(--header-size));
+    transition: all 200ms ease-in-out;
 
     .filter{
         position: relative;
