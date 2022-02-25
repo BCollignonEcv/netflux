@@ -1,7 +1,7 @@
 <template>
   <Section :height="'landing'" :padding="true">
     <template v-if="userStore.hasOneShow">
-      <Slider :title="'My list'" :shows="showStore.getShows"/>
+      <Slider :title="'My list'" :shows="userStore.getShowsList"/>
     </template>
     <Slider :title="'Search'" :shows="showStore.getSearchedShows"/>
     <Slider :title="'All'" :shows="showStore.getShows"/>

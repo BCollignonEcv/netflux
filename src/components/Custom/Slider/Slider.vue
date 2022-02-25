@@ -17,6 +17,10 @@ export default {
     props: {
         title: String, 
         shows: Object,
+        wishlist: {
+            type: Boolean,
+            default: true
+        },
     },
     setup(){
         return {
@@ -34,19 +38,21 @@ export default {
 }
 </script>
 
-<template>
+<template v-if="hasShows">
   <div class="shows-list">
       <h2 v-if="title && hasShows" class="title">{{title}}</h2>
       <div class="shows-list-container">
         <Swiper class="swiper"
             :slidesPerView="8"
             :slidesPerGroup="8"
+            :spaceBetween="24"
             :loop="true"
             :navigation="true"
             :modules="modules">
             <swiper-slide v-for="show in shows" :key="show.id">
                 <SliderItem 
-                    :show="show" 
+                    :show="show"
+                    :wishlist="wishlist"
                 />
             </swiper-slide>
         </Swiper>

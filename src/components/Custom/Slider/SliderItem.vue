@@ -1,17 +1,22 @@
 <template>
     <div class="slider-item">
-        <div class="card-show" @mouseenter="hover = true" @mouseleave="hover = false">
+        <div class="card-show" @mouseenter="hovered" @mouseleave="hovered">
             <figure>
                 <img v-if="hasImg" :src="formatedShow.image.medium" alt="" srcset="" @click="$router.push(`/show/${formatedShow.id}`)">
                 <img v-else class="empty-img" @click="$router.push(`/show/${show.id}`)" >
-                <figcaption class="card-show-description">
+                <figcaption v-if="hover" class="card-show-description">
                     <div class="left">
                         <p v-if="show.name">{{show.name}}</p>
                         <p v-if="show.date">{{show.date}}</p>
                     </div>
-                    <div class="right">
-                        <p v-if="show.rating.average" >{{show.rating.average}}</p>
-                        <HeartIcon v-if="!wishlistDisabled" title="Add to my list" @click="addToMyList"/>
+                    <div class="right"> 
+                        <template v-if="wishlist">
+                            <button @click="toggleFromMyList">
+                                <HeartIcon v-if="isWhishlisted" fillColor="red"  title="Remove from my list" />
+                                <HeartIcon v-else fillColor="white" title="Add to my list"/>
+                            </button>
+                        </template>
+                        <p v-if="show.rating" >{{show.rating.average}}</p>
                     </div>
                 </figcaption>
             </figure>
@@ -28,10 +33,20 @@ export default {
     components: {
         HeartIcon
     },
-    props: ['wishlistDisabled', 'show'],
+    props: {
+        wishlist: Boolean,
+        show: {
+            type: Object,
+            default: {
+                name: "Empty",
+                image: null,
+            }
+        }
+    },
     data(){
         return {
             hover: false,
+            isWhishlisted: false,
         }
     },
     computed: {
@@ -45,16 +60,28 @@ export default {
                 }
             }
             return false; 
-        }
+        },
     },
     setup() {
         const userStore = useUserStore();
         return { userStore }
     },
     methods: {
-        addToMyList(){
-            this.userStore.addShow(this.show)
-        }
+        hovered(){
+            this.hover = !this.hover;
+            if(this.hover){
+                this.isWhishlisted = this.userStore.hasShow(this.show.id);
+            }
+        },
+        toggleFromMyList(){
+            if(this.isWhishlisted){
+                this.isWhishlisted = false;
+                this.userStore.removeShow(this.show)
+            }else{
+                this.isWhishlisted = true;
+                this.userStore.addShow(this.show)
+            }
+        },
     }   
 }
 </script>
@@ -64,20 +91,30 @@ export default {
 .card-show{
     cursor: pointer;
     position: relative;
+
+    img{
+        width: 100%;
+    }
+
     .card-show-description{
         @include customFlex($mode: 'extend');
+        @include customColor($color: 'filter');
+        align-items: flex-end;
         position: absolute;
         bottom: 0;
         left: 0;
         box-sizing: border-box;
-        padding: 5px;
+        width: 100%;
+        height: 50%;
+        padding: 10px;
+        font-weight: bold;
 
         .left{
-
+                text-align: left;
         }
 
         .right{
-            align-items: flex-end;
+            text-align: right;
         }
     }
 }

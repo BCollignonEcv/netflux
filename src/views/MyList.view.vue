@@ -1,11 +1,12 @@
 <template>
   <Section :height="'landing'" :padding="true">
     <h1>My list</h1>
-    <transition>
       <template v-if="userStore.hasOneShow">
-        <Slider :options="{ wishlistDisabled: true}" :shows="userStore.getShowsList"/>
+        <Slider :shows="userStore.getShowsList"/>
       </template>
-    </transition>
+      <template v-else>
+        <SliderItem :show="{name: 'Empty'}"/>
+      </template>
   </Section>
 </template>
 
@@ -13,15 +14,19 @@
 import { useUserStore } from '@/stores/user.store'
 import Section from '@/components/layer.components/Section.layer.vue'
 import Slider from '@/components/Custom/Slider/Slider.vue'
+import SliderItem from '@/components/Custom/Slider/SliderItem.vue'
 
 export default {
   components: {
-    Section, Slider
+    Section, Slider, SliderItem
   },
   setup() {
     const userStore = useUserStore();
     return { userStore }
   },
+  mounted(){
+    console.log(this.userStore.getShowsList)
+  }
 }
 </script>
 <style>
