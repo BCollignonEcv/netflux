@@ -7,10 +7,19 @@ export default {
         episodes: Array,
     },
     data(){
-        return {}
+        return {
+            episodeMaxShow: 4,
+            btnShowAllActive: true,
+        }
     },
     computed: {
         
+    },
+    methods: {
+        showAllEpisodes: function (event) {
+            this.btnShowAllActive = false;
+            this.episodeMaxShow = 0;
+        }
     },
 }
 
@@ -18,9 +27,9 @@ export default {
 
 <template>
     <div class="show__infos-episodes">
-        <h3 class="show__infos-episodes-title">Épisodes</h3>
+        <h3 class="show__infos-episodes-title">Episodes</h3>
         <div class="show__infos-episodes-list" v-if="episodes !== undefined">
-            <div class="show__infos-episode" v-for="(episode, index) in episodes" v-bind:key="episode.id">
+            <div class="show__infos-episode" v-for="(episode, index) in episodes" v-bind:key="episode.id" :class="(episodeMaxShow > 0 && index < episodeMaxShow)?'active':(episodeMaxShow === 0)?'active':''">
 
                 <RouterLink :to="{ name: 'episode', params: { id: episode.id }}" class="show__infos-episode-link">
                     <div v-if="episode !== undefined && episode.image !== undefined && episode.image.original !== undefined" class="show__infos-episode-wrap-img">
@@ -34,7 +43,9 @@ export default {
                 </RouterLink>
 
             </div>
+            <div class="show__infos-episodes-list-overlay"></div>
         </div>
+        <button @click="showAllEpisodes" class="show__infos-episodes-btn" v-show="btnShowAllActive">Show all</button>
     </div>
 </template>
 
@@ -49,16 +60,30 @@ export default {
     }
 
     .show__infos-episodes-list {
+        position: relative;
         display: flex;
         flex-direction: column;
         gap: 16px;
         margin-top: 16px;
     }
 
+    .show__infos-episodes-list-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 140px;
+        background: linear-gradient(180deg, rgba(26,26,26,0) 0%, rgba(26,26,26,1) 100%);
+    }
+
     .show__infos-episode {
+        display: none;
         background-color: #1f1f1f;
         border-radius: 6px;
         overflow: hidden;
+        &.active {
+            display: block;
+        }
     }
 
     .show__infos-episode-link {
@@ -92,6 +117,17 @@ export default {
         -webkit-line-clamp: 3;
                 line-clamp: 3; 
         -webkit-box-orient: vertical;
+    }
+
+    .show__infos-episodes-btn {
+        display: block;
+        margin: 32px auto 16px auto;
+        padding: 16px 32px;
+        border-radius: 6px;
+        background-color: var(--c-primary);
+        font-weight: 600;
+        color: var(--c-tertiary);
+        cursor: pointer;
     }
 
 </style>
