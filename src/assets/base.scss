@@ -43,6 +43,10 @@ body, div, p, span, button, a {
 >>>>>>> 8bec440 (Fix base style + add font Inter + show banner + show infos)
 }
 
+img {
+  vertical-align: middle;
+}
+
 a{
   color: var(--c-neutral)
 }

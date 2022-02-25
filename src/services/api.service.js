@@ -13,7 +13,6 @@ export default class ApiService {
             GET_SHOW_AND_EPISODES: '/show/{0}?embed=episodes',
             GET_EPISODE: '/episodes/{0}',
             SEARCH_SHOWS: '/search/shows?q={0}',
-
         }
     }
     get(endpoint, params = {}) {

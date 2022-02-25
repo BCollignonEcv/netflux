@@ -86,7 +86,6 @@ export default {
   max-height: 50px;
   max-width: 140px;
   object-fit: contain;
-  vertical-align: middle;
 }
 
 </style>
