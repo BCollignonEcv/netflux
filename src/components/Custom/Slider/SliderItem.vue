@@ -4,9 +4,16 @@
             <figure>
                 <img v-if="hasImg" :src="formatedShow.image.medium" alt="" srcset="" @click="$router.push(`/show/${formatedShow.id}`)">
                 <img v-else class="empty-img" @click="$router.push(`/show/${show.id}`)" >
-                <!-- <figcaption v-if="hover && !wishlistDisabled" class="card-show-description">
-                    <HeartIcon v-if="!wishlistDisabled" title="Add to my list" @click="addToMyList"/>
-                </figcaption> -->
+                <figcaption class="card-show-description">
+                    <div class="left">
+                        <p v-if="show.name">{{show.name}}</p>
+                        <p v-if="show.date">{{show.date}}</p>
+                    </div>
+                    <div class="right">
+                        <p v-if="show.rating.average" >{{show.rating.average}}</p>
+                        <HeartIcon v-if="!wishlistDisabled" title="Add to my list" @click="addToMyList"/>
+                    </div>
+                </figcaption>
             </figure>
         </div>
     </div>
@@ -54,45 +61,25 @@ export default {
 
 <style lang="scss" scoped>
 
-$height: 295px;
-$width: 210px;
-    .slider-item{
-        position: relative;
-        min-height: $height;
-        min-width: $width;
-        .card-show {
-            cursor: pointer;
-            &:hover{
-                transform: scale(1.2);
-                position: absolute;
-                z-index: 5;
-            }
+.card-show{
+    cursor: pointer;
+    position: relative;
+    .card-show-description{
+        @include customFlex($mode: 'extend');
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        box-sizing: border-box;
+        padding: 5px;
 
-            figure{
-                img{
-                    height: 100%;
+        .left{
 
-                    &.empty-img{
-                        width: $width;
-                        height: $height;
-                        background-color: var(--c-tertiary)
-                    }
-                }
+        }
 
-                figcaption{
-                    @include customFlex($mode: 'extend');
-                    align-items: center;
-                    position: absolute;
-                    bottom: 0;
-                    width: 100%;
-                }
-            }
-
-            .card-show-description{
-                @include customColor($color: 'primary');
-                @include customFlex();
-                padding: var(--m-3)
-            }
+        .right{
+            align-items: flex-end;
         }
     }
+}
+
 </style>
