@@ -3,10 +3,10 @@
     <Section>
       <ShowBanner :show="showStore.getShow" />
     </Section>
-    <Section :height="'landing'">
+    <Section>
       <ShowInfos :show="showStore.getShow" />
     </Section>
-    <Section :height="'landing'">
+    <Section>
       <ShowComments :show="showStore.getShow" />
     </Section>
   </div>
@@ -17,9 +17,9 @@
 import { useRoute } from 'vue-router';
 import { useShowStore } from '@/stores/show.store';
 import Section from '@/components/layer.components/Section.layer.vue';
-import ShowBanner from '@/components/show.components/ShowBanner.vue';
-import ShowInfos from '@/components/show.components/ShowInfos.vue';
-import ShowComments from '@/components/show.components/ShowComments.vue';
+import ShowBanner from '@/components/Custom/Show/ShowBanner.vue';
+import ShowInfos from '@/components/Custom/Show/ShowInfos.vue';
+import ShowComments from '@/components/Custom/Show/ShowComments.vue';
 
 export default {
   name: 'Show',
@@ -35,7 +35,7 @@ export default {
 
     const id = route.params.id;
 
-    showStore.initShow(id);
+    showStore.initShowWithEpisodes(id);
 
     return { showStore };
   },

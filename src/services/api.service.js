@@ -10,7 +10,7 @@ export default class ApiService {
         this.apiEndpoints = {
             GET_SHOWS: '/shows',
             GET_SHOW: '/show/{0}',
-            GET_SHOW_AND_EPISODES: '/show/{0}?embed=episodes',
+            GET_SHOW_AND_EPISODES: '/shows/{0}?embed[]=episodes&embed[]=cast',
             GET_EPISODE: '/episodes/{0}',
             SEARCH_SHOWS: '/search/shows?q={0}',
         }

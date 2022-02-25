@@ -13,8 +13,6 @@ export default {
 
         const id = route.params.id;
 
-        //showStore.initShowEpisodes(id);
-
         return { showStore };
     },
     props: {
