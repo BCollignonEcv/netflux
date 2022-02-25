@@ -16,7 +16,7 @@ const router = createRouter({
                 import ('../views/Shows.view.vue'),
         },
         {
-            path: '/show/:show',
+            path: '/show/:id',
             name: 'show',
             props: true,
             component: () =>

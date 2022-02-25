@@ -44,7 +44,6 @@ export const useShowStore = defineStore({
     },
     actions: {
         initShows() {
-            console.log(this.shows.length)
             if (this.shows.length < 1) {
                 this.requestShows();
             }
@@ -52,8 +51,8 @@ export const useShowStore = defineStore({
         initEpisode(id) {
             this.requestEpisode(id);
         },
-        initEpisode(id) {
-            this.requestEpisode(id);
+        initShowWithEpisodes(id) {
+            this.requestShowWithEpisodes(id);
         },
         newSearch(newSearch) {
             if (newSearch != '' && newSearch != this.search) {
@@ -79,6 +78,6 @@ export const useShowStore = defineStore({
         },
         async requestSearchShows(search) {
             this.searchedShows = await API.get(API.apiEndpoints.SEARCH_SHOWS, { 0: search });
-        }
+        },
     }
 })
