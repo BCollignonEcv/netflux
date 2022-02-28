@@ -11,7 +11,6 @@ export default {
   },
   data() {
     return {
-      showId: '',
       username: '',
       content: ''
     }
@@ -24,8 +23,23 @@ export default {
     
   },
   methods: {
-    newComment(e){
-      this.showStore.showAddComment(e);
+    newComment(){
+      const showId = parseInt(document.getElementById('show-id').value);
+
+      if (showId !== undefined && showId !== null &&
+          this.username !== '' &&
+          this.content !== '') {
+
+          let newComment  = {
+              showId: showId,
+              username: this.username,
+              content: this.content
+          };
+
+          this.showStore.showAddComment(newComment);
+
+      }
+
     }
   }
 }
@@ -37,7 +51,7 @@ export default {
     <h3 class="show__add-comment-title">Add Comment</h3>
 
     <form action="" @submit.prevent="newComment()" class="show__add-comment-form">
-      <input v-if="show !== undefined && show.id !== undefined" type="hidden" v-model="show.id">
+      <input id="show-id" type="hidden" :value="show.id">
       <input id="comment-username" name="comment-username" class="show__add-comment-username" type="text" placeholder="Username" v-model="username">
       <textarea id="comment-content" name="comment-content" class="show__add-comment-content" rows="5" cols="33" placeholder="Content" v-model="content"></textarea>
       <button type="submit" class="show__add-comment-submit">Send</button>

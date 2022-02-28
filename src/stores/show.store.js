@@ -66,13 +66,13 @@ export const useShowStore = defineStore({
             }
         },
         showAddComment(newComment) {
-            if (newComment != '') {
-                console.log(newComment);
-                // this.showComments.push(newComment);
-                // this.search = newSearch;
-                // this.searchHistory.push(newSearch);
-                // this.requestSearchShows();
+            
+            if (newComment !== undefined && newComment!== '') {
+
+                this.showComments.push(newComment);
+
             }
+            
         },
         async requestShows() {
             this.shows = await API.get(API.apiEndpoints.GET_SHOWS);

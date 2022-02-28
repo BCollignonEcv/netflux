@@ -7,10 +7,10 @@
       <ShowInfos :show="showStore.getShow" />
     </Section>
     <Section>
-      <ShowComments :show="showStore.getShow" />
+      <ShowComments :show="showStore.getShow" :showComments="showStore.getShowComments" />
     </Section>
     <Section>
-      <ShowCommentForm :show="showStore.getShow" />
+      <ShowCommentForm :show="showStore.getShow" :showComments="showStore.getShowComments" />
     </Section>
   </div>
 </template>

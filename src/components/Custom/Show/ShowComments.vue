@@ -17,6 +17,7 @@ export default {
     },
     props: {
         show: Object,
+        showComments: Object,
     },
     data(){
         return {}
@@ -34,6 +35,14 @@ export default {
         <h3 class="show__comments-title">Comments</h3>
 
         <div class="show__comments-list">
+
+            <template v-for="comment in showComments" v-bind:key="comment.showId">
+                <div class="show__comments-item" v-if="comment.showId === show.id">
+                    <p>{{comment.showId}}</p>
+                    <p>{{comment.username}}</p>
+                    <p>{{comment.content}}</p>
+                </div>
+            </template>
 
         </div>
         
