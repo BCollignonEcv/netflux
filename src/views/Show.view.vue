@@ -9,6 +9,9 @@
     <Section>
       <ShowComments :show="showStore.getShow" />
     </Section>
+    <Section>
+      <ShowCommentForm :show="showStore.getShow" />
+    </Section>
   </div>
 </template>
 
@@ -20,6 +23,7 @@ import Section from '@/components/layer.components/Section.layer.vue';
 import ShowBanner from '@/components/Custom/Show/ShowBanner.vue';
 import ShowInfos from '@/components/Custom/Show/ShowInfos.vue';
 import ShowComments from '@/components/Custom/Show/ShowComments.vue';
+import ShowCommentForm from '@/components/form.components/Comment.form.vue';
 
 export default {
   name: 'Show',
@@ -27,7 +31,8 @@ export default {
     Section,
     ShowBanner,
     ShowInfos,
-    ShowComments
+    ShowComments,
+    ShowCommentForm
   },
   setup() {
     const route = useRoute();

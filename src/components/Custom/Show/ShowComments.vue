@@ -32,6 +32,10 @@ export default {
     <div class="show__comments">
 
         <h3 class="show__comments-title">Comments</h3>
+
+        <div class="show__comments-list">
+
+        </div>
         
     </div>
 </template>

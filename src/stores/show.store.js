@@ -8,6 +8,7 @@ export const useShowStore = defineStore({
     state: () => ({
         shows: [],
         show: [],
+        showComments: [],
         episode: [],
         searchedShows: [],
         searchHistory: [],
@@ -19,6 +20,9 @@ export const useShowStore = defineStore({
         },
         getShow: (state) => {
             return state.show;
+        },
+        getShowComments: (state) => {
+            return state.showComments;
         },
         getEpisode: (state) => {
             return state.episode;
@@ -59,6 +63,15 @@ export const useShowStore = defineStore({
                 this.search = newSearch;
                 this.searchHistory.push(newSearch);
                 this.requestSearchShows();
+            }
+        },
+        showAddComment(newComment) {
+            if (newComment != '') {
+                console.log(newComment);
+                // this.showComments.push(newComment);
+                // this.search = newSearch;
+                // this.searchHistory.push(newSearch);
+                // this.requestSearchShows();
             }
         },
         async requestShows() {
