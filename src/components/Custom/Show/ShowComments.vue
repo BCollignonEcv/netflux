@@ -38,9 +38,8 @@ export default {
 
             <template v-for="comment in showComments" v-bind:key="comment.showId">
                 <div class="show__comments-item" v-if="comment.showId === show.id">
-                    <p>{{comment.showId}}</p>
-                    <p>{{comment.username}}</p>
-                    <p>{{comment.content}}</p>
+                    <p class="show__comments-username">{{comment.username}}</p>
+                    <p class="show__comments-content">{{comment.content}}</p>
                 </div>
             </template>
 
@@ -63,6 +62,30 @@ export default {
     .show__comments-title {
         font-size: 20px;
         line-height: 26px;
+    }
+
+    .show__comments-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 16px;
+    }
+
+    .show__comments-item {
+        padding: 16px;
+        border-top: 1px solid var(--c-neutral);
+    }
+    .show__comments-item:first-child {
+        border: none;
+    }
+
+    .show__comments-username {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .show__comments-content {
+        margin-top: 8px;
     }
 
 </style>
