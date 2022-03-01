@@ -1,12 +1,12 @@
 <template>
   <Section :height="'landing'" :padding="true">
-    <h1>My list</h1>
-      <template v-if="userStore.hasOneShow">
-        <Slider :shows="userStore.getShowsList"/>
-      </template>
-      <template v-else>
-        <SliderItem :show="{name: 'Empty'}"/>
-      </template>
+    <template v-if="userStore.hasOneShow">
+      <Slider :title="'My list'" :shows="userStore.getShowsList"/>
+    </template>
+    <template v-else>
+      <h2>My list</h2>
+      <p>You don't have favorite shows list yet !</p>
+    </template>
   </Section>
 </template>
 

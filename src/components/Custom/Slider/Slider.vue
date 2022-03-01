@@ -28,25 +28,30 @@ export default {
         }
     },
     data(){
-        return {}
+        return {
+            slideByPage: 8,
+        }
     },
     computed: {
         hasShows(){
-            return this.shows && this.shows.length > 0
+            return this.shows && Object.keys(this.shows).length > 0
+        },
+        hasEnoughtShowsToLoop(){
+            return Object.keys(this.shows).length > this.slideByPage
         }
     },
 }
 </script>
 
 <template v-if="hasShows">
-  <div class="shows-list">
+  <div class="shows-list" :id="Object.keys(this.shows).length">
       <h2 v-if="title && hasShows" class="title">{{title}}</h2>
       <div class="shows-list-container">
         <Swiper class="swiper"
-            :slidesPerView="8"
-            :slidesPerGroup="8"
+            :slidesPerView="slideByPage"
+            :slidesPerGroup="slideByPage"
             :spaceBetween="24"
-            :loop="true"
+            :loop="hasEnoughtShowsToLoop"
             :navigation="true"
             :modules="modules">
             <swiper-slide v-for="show in shows" :key="show.id">
