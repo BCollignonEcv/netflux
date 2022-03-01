@@ -2,6 +2,7 @@
   <header class="header">
     <div class="header-navigation left">
       <RouterLink to="/">
+        <span style="line-height: 0; font-size: 0; color: transparent; ">Home</span>
         <Logo/>
       </RouterLink>
       <nav>

@@ -2,12 +2,12 @@
     <div class="slider-item">
         <div class="card-show" @mouseenter="hovered" @mouseleave="hovered">
             <figure>
-                <img v-if="hasImg" :src="formatedShow.image.medium" alt="" srcset="" @click="$router.push(`/show/${formatedShow.id}`)">
-                <img v-else class="empty-img" @click="$router.push(`/show/${show.id}`)" >
+                <img v-if="hasImg" :src="formatedShow.image.medium" :alt="formatedShow.name + '-picture'" srcset="" @click="$router.push(`/show/${formatedShow.id}`)">
+                <img v-else class="empty-img" @click="$router.push(`/show/${formatedShow.id}`)" alt="empty-picture">
                 <figcaption v-if="hover" class="card-show-description">
                     <div class="left">
-                        <p v-if="show.name">{{show.name}}</p>
-                        <p v-if="show.date">{{show.date}}</p>
+                        <p v-if="formatedShow.name">{{formatedShow.name}}</p>
+                        <p v-if="formatedShow.date">{{formatedShow.date}}</p>
                     </div>
                     <div class="right"> 
                         <template v-if="wishlist">
@@ -16,7 +16,7 @@
                                 <HeartIcon v-else fillColor="white" title="Add to my list"/>
                             </button>
                         </template>
-                        <p v-if="show.rating" >{{show.rating.average}}</p>
+                        <p v-if="formatedShow.rating" >{{formatedShow.rating.average}}</p>
                     </div>
                 </figcaption>
             </figure>
@@ -108,6 +108,7 @@ export default {
         height: 50%;
         padding: 10px;
         font-weight: bold;
+        pointer-events: none;
 
         .left{
                 text-align: left;
@@ -115,6 +116,10 @@ export default {
 
         .right{
             text-align: right;
+
+            button {
+                pointer-events: auto;
+            }
         }
     }
 }

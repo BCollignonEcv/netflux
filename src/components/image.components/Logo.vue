@@ -1,5 +1,5 @@
 <template>
-  <img src="../../assets/img/netflux-logo.png" class="logo">
+  <img src="../../assets/img/netflux-logo.png" alt="netlux-logo" class="logo">
 </template>
 
 <script>

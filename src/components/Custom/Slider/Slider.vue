@@ -52,7 +52,7 @@ export default {
             <swiper-slide v-for="show in shows" :key="show.id">
                 <SliderItem 
                     :show="show"
-                    :wishlist="wishlist" 
+                    :wishlist="wishlist"
                 />
             </swiper-slide>
         </Swiper>

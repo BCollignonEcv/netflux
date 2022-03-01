@@ -33,7 +33,13 @@ export default {
     <Slider :title="'HightLigth'" :shows="showStore.getShowsHightLight"/>
   </Section>
   <Section :padding="true">
-    <Slider :title="'All shows'" :shows="showStore.getShowsExeptHightLight"/>
+    <Slider :title="'All shows'" :shows="showStore.getShowsExceptHightLight"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Actions :'" :shows="showStore.getShowsFilter('action')"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Drama :'" :shows="showStore.getShowsFilter('drama')"/>
   </Section>
     <!-- <Section>
     <transition>

@@ -9,6 +9,7 @@ export const useShowStore = defineStore({
         shows: [],
         show: [],
         episode: [],
+        genres: [],
         searchedShows: [],
         searchHistory: [],
         search: '',
@@ -26,8 +27,13 @@ export const useShowStore = defineStore({
         getShowsHightLight: (state) => {
             return state.shows.slice(0, 10);
         },
-        getShowsExeptHightLight: (state) => {
+        getShowsExceptHightLight: (state) => {
             return state.shows.slice(10, 50);
+        },
+        getShowsFilter: (state) => {
+            return (genre) => {
+                return state.genres[genre];
+            };
         },
         getCurrentSearch: (state) => {
             return state.search;
@@ -46,6 +52,8 @@ export const useShowStore = defineStore({
         initShows() {
             if (this.shows.length < 1) {
                 this.requestShows();
+                this.provideShowsByFilter('action')
+                this.provideShowsByFilter('drama')
             }
         },
         initEpisode(id) {
@@ -53,6 +61,11 @@ export const useShowStore = defineStore({
         },
         initShowWithEpisodes(id) {
             this.requestShowWithEpisodes(id);
+        },
+        provideShowsByFilter(genre) {
+            this.genres[genre] = Object.entries(this.shows).filter(
+                (value) => value.genre.includes(genre)
+            );
         },
         searchShows(newSearch) {
             if (newSearch != '' && newSearch != this.search) {
