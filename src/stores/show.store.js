@@ -9,6 +9,7 @@ export const useShowStore = defineStore({
         shows: [],
         show: [],
         episode: [],
+        genres: [],
         searchedShows: [],
         searchHistory: [],
         search: '',
@@ -26,8 +27,16 @@ export const useShowStore = defineStore({
         getShowsHightLight: (state) => {
             return state.shows.slice(0, 10);
         },
-        getShowsExeptHightLight: (state) => {
+        getShowsExceptHightLight: (state) => {
             return state.shows.slice(10, 50);
+        },
+        getShowsByGenre(state) {
+            return (genre) => {
+                return Object.entries(state.shows).filter(([key, value]) => value.genres.includes(genre)).reduce((filredShows, key) => {
+                    filredShows[key[0]] = state.shows[key[0]];
+                    return filredShows;
+                }, {});;
+            }
         },
         getCurrentSearch: (state) => {
             return state.search;

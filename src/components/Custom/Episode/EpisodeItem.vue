@@ -5,7 +5,7 @@
         </div>
         <div class="show">
             <div class="cover" v-if="episode !== undefined && episode.image !== undefined && episode.image.original !== undefined">
-                <img :src="episode.image.original"> <!--  https://static.tvmaze.com/uploads/images/original_untouched/1/4388.jpg -->
+                <img :src="episode.image.original" :alt="episode.name + '-picture'"> <!--  https://static.tvmaze.com/uploads/images/original_untouched/1/4388.jpg -->
             </div>
             <div class="description">
                 <h1 class="title">{{episode.name}}</h1><br>

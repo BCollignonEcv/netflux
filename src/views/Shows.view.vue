@@ -1,10 +1,24 @@
 <template>
-  <Section :height="'landing'" :padding="true">
-    <template v-if="userStore.hasOneShow">
+  <Section :padding="true">
+      <Slider :title="'Search'" :shows="showStore.getSearchedShows"/>
+  </Section>
+  <Section :padding="true">
       <Slider :title="'My list'" :shows="userStore.getShowsList"/>
-    </template>
-    <Slider :title="'Search'" :shows="showStore.getSearchedShows"/>
-    <Slider :title="'All'" :shows="showStore.getShows"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Actions :'" :shows="showStore.getShowsByGenre('Action')"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Crime :'" :shows="showStore.getShowsByGenre('Crime')"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Family :'" :shows="showStore.getShowsByGenre('Family')"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Comedy :'" :shows="showStore.getShowsByGenre('Comedy')"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Drama :'" :shows="showStore.getShowsByGenre('Drama')"/>
   </Section>
 </template>
 
