@@ -53,6 +53,7 @@ export default {
             :spaceBetween="24"
             :loop="hasEnoughtShowsToLoop"
             :navigation="true"
+            :lazyLoading="true"
             :modules="modules">
             <swiper-slide v-for="show in shows" :key="show.id">
                 <SliderItem 

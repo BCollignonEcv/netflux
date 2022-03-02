@@ -13,7 +13,6 @@ export default {
   setup() {
     const showStore = useShowStore();
     const userStore = useUserStore();
-    showStore.initShows();
     return { showStore, userStore }
   },
   data() {

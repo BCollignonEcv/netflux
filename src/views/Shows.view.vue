@@ -23,10 +23,10 @@
 </template>
 
 <script>
-import { useShowStore } from '@/stores/show.store'
-import { useUserStore } from '@/stores/user.store'
 import Section from '@/components/layer.components/Section.layer.vue'
 import Slider from '@/components/Custom/Slider/Slider.vue'
+import { useShowStore } from '@/stores/show.store'
+import { useUserStore } from '@/stores/user.store'
 
 export default {
   name: 'Shows',
@@ -36,7 +36,6 @@ export default {
   setup() {
     const showStore = useShowStore();
     const userStore = useUserStore();
-    showStore.initShows();
     return { showStore, userStore }
   },
 }
