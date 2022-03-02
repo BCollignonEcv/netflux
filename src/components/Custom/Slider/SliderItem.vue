@@ -98,7 +98,7 @@ export default {
 
     .card-show-description{
         @include customFlex($mode: 'extend');
-        @include customColor($color: 'filter');
+        @include customFilter();
         align-items: flex-end;
         position: absolute;
         bottom: 0;

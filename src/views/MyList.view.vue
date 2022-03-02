@@ -25,7 +25,6 @@ export default {
     return { userStore }
   },
   mounted(){
-    console.log(this.userStore.getShowsList)
   }
 }
 </script>

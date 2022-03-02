@@ -30,10 +30,13 @@ export const useShowStore = defineStore({
         getShowsExceptHightLight: (state) => {
             return state.shows.slice(10, 50);
         },
-        getShowsFilter: (state) => {
+        getShowsByGenre(state) {
             return (genre) => {
-                return state.genres[genre];
-            };
+                return Object.entries(state.shows).filter(([key, value]) => value.genres.includes(genre)).reduce((filredShows, key) => {
+                    filredShows[key[0]] = state.shows[key[0]];
+                    return filredShows;
+                }, {});;
+            }
         },
         getCurrentSearch: (state) => {
             return state.search;
@@ -52,8 +55,6 @@ export const useShowStore = defineStore({
         initShows() {
             if (this.shows.length < 1) {
                 this.requestShows();
-                this.provideShowsByFilter('action')
-                this.provideShowsByFilter('drama')
             }
         },
         initEpisode(id) {
@@ -61,11 +62,6 @@ export const useShowStore = defineStore({
         },
         initShowWithEpisodes(id) {
             this.requestShowWithEpisodes(id);
-        },
-        provideShowsByFilter(genre) {
-            this.genres[genre] = Object.entries(this.shows).filter(
-                (value) => value.genre.includes(genre)
-            );
         },
         searchShows(newSearch) {
             if (newSearch != '' && newSearch != this.search) {

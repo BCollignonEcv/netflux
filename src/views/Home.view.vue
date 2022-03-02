@@ -21,13 +21,16 @@ export default {
     }
   },
   computed: {},
-  methods: {}
+  mounted(){
+    
+  },
+  methods: {},
 }
 </script>
 
 <template>
   <Section :height="'landing'">
-    <Landing :shows="showStore.getShowsHightLight"></Landing>    
+    <Landing :shows="showStore.getShowsHightLight"></Landing>
   </Section>
   <Section :padding="true" :overlay="true">
     <Slider :title="'HightLigth'" :shows="showStore.getShowsHightLight"/>
@@ -36,16 +39,18 @@ export default {
     <Slider :title="'All shows'" :shows="showStore.getShowsExceptHightLight"/>
   </Section>
   <Section :padding="true">
-    <Slider :title="'Actions :'" :shows="showStore.getShowsFilter('action')"/>
+    <Slider :title="'Actions :'" :shows="showStore.getShowsByGenre('Action')"/>
   </Section>
   <Section :padding="true">
-    <Slider :title="'Drama :'" :shows="showStore.getShowsFilter('drama')"/>
+    <Slider :title="'Crime :'" :shows="showStore.getShowsByGenre('Crime')"/>
   </Section>
-    <!-- <Section>
-    <transition>
-      <template v-if="userStore.hasOneShow">
-        <Slider :title="'Your selection'" :options="{ wishlistDisabled: true, scrollabled: true}" :shows="userStore.getShowsListFirstTen"/>
-      </template>
-    </transition>
-  </Section> -->
+  <Section :padding="true">
+    <Slider :title="'Family :'" :shows="showStore.getShowsByGenre('Family')"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Comedy :'" :shows="showStore.getShowsByGenre('Comedy')"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Drama :'" :shows="showStore.getShowsByGenre('Drama')"/>
+  </Section>
 </template>

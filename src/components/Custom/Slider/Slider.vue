@@ -60,15 +60,50 @@ export default {
                     :wishlist="wishlist"
                 />
             </swiper-slide>
+
         </Swiper>
       </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .shows-list{
     .title{
-        margin-bottom: var(--m-3);
+        margin-bottom: var(--m-5);
+    }
+
+    .swiper-button-prev{
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 3vw;
+        margin: auto;
+        color: var(--c-primary);
+        transition: all .3s ease-in-out;
+
+        &:hover{
+            @include customColor($color: 'filter');
+            width: 5vw;
+            color: var(--c-primary);
+            transition: all .3s ease-in-out;
+        }
+    }
+
+    .swiper-button-next{
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 5vw;
+        margin: auto;
+        color: var(--c-primary);
+        transition: all .3s ease-in-out;
+
+        &:hover{
+            @include customColor($color: 'filter');
+            width: 5vw;
+            color: var(--c-primary);
+            transition: all .3s ease-in-out;
+        }
     }
 }
 

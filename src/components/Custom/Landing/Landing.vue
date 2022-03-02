@@ -81,7 +81,7 @@ export default {
     transition: all 200ms ease-in-out;
 
     .filter{
-        @include customColor($color: 'filter');
+        @include customFilter();
         position: relative;
         height: inherit;
         .content{
