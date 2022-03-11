@@ -22,5 +22,6 @@ export default {
     @include customColor();
     @include sectionPadding;
     width: 100%;
+    box-sizing: border-box;
 }
 </style>

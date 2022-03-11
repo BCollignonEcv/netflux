@@ -78,11 +78,12 @@ export default {
     background-position: center;
     background-size: cover;
     height: calc(100vh - var(--header-size));
+    transition: all 200ms ease-in-out;
 
     .filter{
+        @include customFilter();
         position: relative;
         height: inherit;
-        background: linear-gradient(180deg, rgba(200,200,200,0.2) 0%, var(--c-tertiary) 100%);
         .content{
             width: 50%;
             position: absolute;

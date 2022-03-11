@@ -1,7 +1,10 @@
 <template>
   <header class="header">
     <div class="header-navigation left">
-      <RouterLink to="/">Netflux Logo</RouterLink>
+      <RouterLink to="/">
+        <span style="line-height: 0; font-size: 0; color: transparent; ">Home</span>
+        <Logo/>
+      </RouterLink>
       <nav>
         <ul>
           <li><RouterLink to="/">Home</RouterLink></li>
@@ -18,11 +21,12 @@
 
 <script>
 import SearchBar from '@/components/form.components/SearchBar.form.vue'
+import Logo from '@/components/image.components/Logo.vue'
 import { useShowStore } from '@/stores/show.store'
 
 export default {
   components: {
-    SearchBar
+    SearchBar, Logo
   },
   setup() {
     const showStore = useShowStore();
@@ -60,6 +64,10 @@ export default {
         @include customFlex();
         align-items: center;
         gap: var(--m-5);
+
+        a{
+          font-weight: bold;
+        }
       }
     }
 
@@ -73,6 +81,12 @@ export default {
       padding-right: var(--m-3);
     }
   }
+}
+
+.header-navigation__logo {
+  max-height: 50px;
+  max-width: 140px;
+  object-fit: contain;
 }
 
 </style>

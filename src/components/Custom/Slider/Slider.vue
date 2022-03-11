@@ -1,59 +1,111 @@
 <script>
-import SliderItem from './SliderItem.vue'
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Navigation } from "swiper";
+import SliderItem from "./SliderItem.vue";
+
+// Import Swiper styles
+import "swiper/css";
+
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 export default {
     name: 'Slider',
     components: {
-        SliderItem
+        Swiper, SwiperSlide, SliderItem
     },
     props: {
         title: String, 
-        options: {
-            type: Object,
-            default() {
-                return {
-                    wishlistDisabled: false,
-                    scrollable: true
-                }
-            }
-        }, 
-        shows: Object
+        shows: Object,
+        wishlist: {
+            type: Boolean, 
+            default: true
+        },
+    },
+    setup(){
+        return {
+            modules: [Navigation],
+        }
     },
     data(){
-        return {}
+        return {
+            slideByPage: 8,
+        }
     },
     computed: {
         hasShows(){
-            return this.shows && this.shows.length > 0
+            return this.shows && Object.keys(this.shows).length > 0
+        },
+        hasEnoughtShowsToLoop(){
+            return Object.keys(this.shows).length > this.slideByPage
         }
     },
 }
 </script>
 
-<template>
-  <div class="shows-list">
-      <h2 v-if="title && hasShows">{{title}}</h2>
+<template v-if="hasShows">
+  <div class="shows-list" :id="Object.keys(this.shows).length">
+      <h2 v-if="title && hasShows" class="title">{{title}}</h2>
       <div class="shows-list-container">
-        <SliderItem 
-            v-for="show in shows" :key="show.id" 
-            :show="show" 
-            :wishlistDisabled="this.options.wishlistDisabled"
-            :class="{ 'catalog': !this.options.scrollabled }"
-        />
+        <Swiper class="swiper"
+            :slidesPerView="slideByPage"
+            :slidesPerGroup="slideByPage"
+            :spaceBetween="24"
+            :loop="hasEnoughtShowsToLoop"
+            :navigation="true"
+            :lazyLoading="true"
+            :modules="modules">
+            <swiper-slide v-for="show in shows" :key="show.id">
+                <SliderItem 
+                    :show="show"
+                    :wishlist="wishlist"
+                />
+            </swiper-slide>
+
+        </Swiper>
       </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
-    .shows-list{
-        padding: var(--m-3) 0;
-        .shows-list-container {
-            @include customFlex($gap: 5, $mode: 'extend');
-            padding: var(--m-5) 0;
+<style lang="scss">
+.shows-list{
+    .title{
+        margin-bottom: var(--m-5);
+    }
 
-            &.catalog{
-                @include customFlex($wrap: nowrap);
-            }
+    .swiper-button-prev{
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 3vw;
+        margin: auto;
+        color: var(--c-primary);
+        transition: all .3s ease-in-out;
+
+        &:hover{
+            @include customColor($color: 'filter');
+            width: 5vw;
+            color: var(--c-primary);
+            transition: all .3s ease-in-out;
         }
     }
+
+    .swiper-button-next{
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 5vw;
+        margin: auto;
+        color: var(--c-primary);
+        transition: all .3s ease-in-out;
+
+        &:hover{
+            @include customColor($color: 'filter');
+            width: 5vw;
+            color: var(--c-primary);
+            transition: all .3s ease-in-out;
+        }
+    }
+}
+
 </style>

@@ -5,56 +5,62 @@
  */
 
 @mixin customColor($color: 'primary') {
-    @if $color == 'primary' {
+    @if $color=='primary' {
         background-color: var(--c-tertiary);
         color: var(--c-neutral);
     }
-
-    @if $color == 'secondary' {
+    @if $color=='secondary' {
         background-color: var(--c-neutral);
         color: var(--c-tertiary);
     }
-
-    @if $color == 'tertiary' {
+    @if $color=='tertiary' {
         background-color: var(--c-secondary);
         color: var(--c-neutral);
     }
-
-    @if $color == 'valid' {
+    @if $color=='valid' {
         background-color: var(--c-valid);
         color: var(--c-neutral);
     }
-
-    @if $color == 'error' {
+    @if $color=='error' {
         background-color: var(--c-error);
         color: var(--c-neutral);
     }
-
-    @if $color == 'active' {
+    @if $color=='active' {
         background-color: var(--c-primary);
         color: var(--c-neutral);
     }
+    @if $color=='filter' {
+        background-color: rgba(38, 38, 38, 0.8);
+        color: var(--c-neutral);
+    }
+}
+
+@mixin customFilter($direction: 180deg) {
+    background: linear-gradient($direction, rgba(200, 200, 200, 0) 0%, var(--c-tertiary) 100%);
+    color: var(--c-neutral);
 }
 
 
 /*
  * BORDER
  */
+
 @mixin customBorder($color: 'primary', $top: 0, $right: 0, $bottom: 0, $left: 0) {
     border-color: var(--c- + $color);
-    @if $top != 0 {
+    @if $top !=0 {
         border-top: var(--p-1) solid;
     }
-    @if $right != 0 {
+    @if $right !=0 {
         border-right: var(--p-1) solid;
     }
-    @if $bottom != 0 {
+    @if $bottom !=0 {
         border-bottom: var(--p-1) solid;
     }
-    @if $left != 0 {
+    @if $left !=0 {
         border-left: var(--p-1) solid;
     }
 }
+
 
 /*
  *
@@ -70,38 +76,34 @@
     transition: all 1s ease;
 }
 
+
 /*
  *
  * FLEX
  *
  */
 
- @mixin customFlex($direction: row, $mode: 'compact', $wrap: nowrap, $gap: 0) {
+@mixin customFlex($direction: row, $mode: 'compact', $wrap: nowrap, $gap: 0) {
     display: flex;
     flex-direction: $direction;
     flex-wrap: $wrap;
     height: auto;
-
     // GAP
-    @if $gap > 1 & $gap < 5 {
+    @if $gap>1 & $gap < 5 {
         gap: var(--m- + $gap);
     }
-
-    @if $mode == 'extend' {
-        &>*{
+    @if $mode=='extend' {
+        &>* {
             flex: 1;
         }
     }
-
-    @if $wrap == wrap {
-        &>*{
+    @if $wrap==wrap {
+        &>* {
             flex: 1;
         }
     }
-
-
-    
 }
+
 
 /*
  *

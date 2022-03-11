@@ -8,11 +8,11 @@ export default class ApiService {
             url: this.url,
         };
         this.apiEndpoints = {
-            GET_SHOWS:             '/shows',
-            GET_SHOW:              '/show/{0}',
-            GET_SHOW_AND_EPISODES: '/show/{0}?embed=episodes',
-            GET_EPISODE:           '/shows/{0}/episodebynumber?season={1}&number={2}',
-            SEARCH_SHOWS:          '/search/shows?q={0}',
+            GET_SHOWS: '/shows',
+            GET_SHOW: '/show/{0}',
+            GET_SHOW_AND_EPISODES: '/shows/{0}?embed[]=episodes&embed[]=cast',
+            GET_EPISODE: '/episodes/{0}',
+            SEARCH_SHOWS: '/search/shows?q={0}',
         }
     }
     get(endpoint, params = {}) {
@@ -25,15 +25,15 @@ export default class ApiService {
     };
 };
 
-function feedRequestUrl(url, params){
+function feedRequestUrl(url, params) {
     let paramsRequired = url.match(/{\d}/)
-    if(paramsRequired){
-        if(paramsRequired.length != Object.keys(params).length){
+    if (paramsRequired) {
+        if (paramsRequired.length != Object.keys(params).length) {
             throw new Error('api.service - Missing request params');
         }
         paramsRequired.forEach((value, index) => {
             url = url.replace(value, params[index])
-        });  
+        });
     }
     return url;
 }
