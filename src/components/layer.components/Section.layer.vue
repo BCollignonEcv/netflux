@@ -81,7 +81,7 @@ section {
     }
 
     &.landing{
-        height: calc(100vh - var(--header-size));
+        min-height: calc(100vh - var(--header-size));
     }
 
     &.p1{
