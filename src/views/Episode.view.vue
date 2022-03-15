@@ -7,8 +7,8 @@
 <script>
 import { useRoute } from 'vue-router'
 import { useShowStore } from '@/stores/show.store'
-import Section from '@/components/layer.components/Section.layer.vue'
-import EpisodeItem from '@/components/Custom/Episode/EpisodeItem.vue'
+import { Section } from '@/components/layer.components'
+import { EpisodeItem } from '@/components/Custom/Episode'
 
 export default {
   name: 'Episode',

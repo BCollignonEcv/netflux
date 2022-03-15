@@ -20,8 +20,8 @@
 </template>
 
 <script>
-import SearchBar from '@/components/form.components/SearchBar.form.vue'
-import Logo from '@/components/image.components/Logo.vue'
+import { SearchBar } from '@/components/form.components'
+import { Logo } from '@/components/image.components'
 import { useShowStore } from '@/stores/show.store'
 
 export default {

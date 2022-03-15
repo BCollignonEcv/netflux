@@ -1,8 +1,8 @@
 <template>
     <div class="slider-item">
-        <div class="card-show" @mouseenter="hovered" @mouseleave="hovered">
+        <div class="card-show" @mouseover="mouseover" @mouseleave="mouseleave">
             <figure>
-                <img v-if="hasImg" :src="formatedShow.image.medium" :alt="formatedShow.name + '-picture'" srcset="" @click="$router.push(`/show/${formatedShow.id}`)">
+                <img v-if="hasImg" :src="formatedShow.image.medium" :alt="formatedShow.name + '-picture'" srcset="" @click="goToShow">
                 <img v-else class="empty-img" @click="$router.push(`/show/${formatedShow.id}`)" alt="empty-picture">
                 <figcaption v-if="hover" class="card-show-description">
                     <div class="left">
@@ -67,13 +67,17 @@ export default {
         return { userStore }
     },
     methods: {
-        hovered(){
-            this.hover = !this.hover;
-            if(this.hover){
-                this.isWhishlisted = this.userStore.hasShow(this.show.id);
-            }
+        mouseover: function () {
+            this.hover = true;
+            this.isWhishlisted = this.userStore.hasShow(this.show.id);
         },
-        toggleFromMyList(){
+        mouseleave: function () {
+            this.hover = false;
+        },
+        goToShow: function() {
+            this.$router.push(`/show/${this.formatedShow.id}`)
+        },
+        toggleFromMyList: function(){
             if(this.isWhishlisted){
                 this.isWhishlisted = false;
                 this.userStore.removeShow(this.show)
