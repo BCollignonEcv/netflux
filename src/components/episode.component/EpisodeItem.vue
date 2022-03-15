@@ -5,53 +5,44 @@
         </div>
         <div class="show">
             <div class="cover" v-if="episode !== undefined && episode.image !== undefined && episode.image.original !== undefined">
-                <img :src="episode.image.original" :alt="episode.name + '-picture'"> <!--  https://static.tvmaze.com/uploads/images/original_untouched/1/4388.jpg -->
+                <img :src="episode.image.original"> <!--  https://static.tvmaze.com/uploads/images/original_untouched/1/4388.jpg -->
             </div>
             <div class="description">
                 <h1 class="title">{{episode.name}}</h1><br>
                 <p>S{{ episode.season }} • E{{ episode.number }}</p><br>
                 <div v-html="episode.summary"></div><br>
                 <p>{{ episode.runtime }} min</p>
-                <p v-if="episode.rating" class="rate">{{episode.rating.average }} / 10</p>
+                <p v-if="episode.rating.average" class="rate">{{episode.rating.average }} / 10</p>
             </div>
         </div>
         <div class="routerEp">
-            <RouterLink @click="showStore.initEpisode(prevEp)" :to="'/episode/'+ prevEp" class="routerEp-btn">
-                Previous episode
+            <RouterLink :to="'/episode/'+ prevEp" class="routerEp-btn">
+                Previous episode {{ episode.id-1 }}
             </RouterLink>
-            <RouterLink @click="showStore.initEpisode(nextEp)" :to="'/episode/'+ nextEp" class="routerEp-btn">
-                Next episode
+            <RouterLink :to="'/episode/'+ nextEp" class="routerEp-btn">
+                Next episode {{ episode.id+1 }}
             </RouterLink>
         </div>
     </div>    
 </template>
 
 <script>
-import { useShowStore } from '@/stores/show.store'
+import Section from '@/components/layer.components/Section.layer.vue';
 
 export default {
   name: 'EpisodeItem',
+  components: {
+    Section
+  },
   props: {
     episode: Object
   },
-  setup() {
-    const showStore = useShowStore();
-    return { showStore }
+  data(){
+    return {
+        prevEp: this.episode.id - 1,
+        nextEp: this.episode.id + 1
+    }
   },
-  computed: {
-        prevEp() {
-            return this.episode.id-1
-        },
-        nextEp() {
-            return this.episode.id+1
-        } 
-  },
-//   data(){
-//     return {
-//         prevEp: this.episode.id-1,
-//         nextEp: this.episode.id+1
-//     }
-//   },
   mounted(){
   }
 }
