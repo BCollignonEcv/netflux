@@ -40,4 +40,7 @@ export default {
   <Section :padding="true">
     <Slider :title="'Comedy :'" :shows="showStore.getShowsByGenre('Comedy')"/>
   </Section>
+  <Section :padding="true">
+    <Slider :title="'Family :'" :shows="showStore.getShowsByGenre('Family')"/>
+  </Section>
 </template>
