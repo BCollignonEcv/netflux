@@ -81,16 +81,15 @@ section {
     }
 
     &.landing{
-        height: calc(100vh - var(--header-size));
+        min-height: calc(100vh - var(--header-size));
     }
 
     &.p1{
-        padding: var(--m-2) var(--m-2);
+        padding: var(--m-4) var(--m-2);
     }
 
     &.overlay{
         margin-top: -10%;
-        margin-bottom: -5%;
         z-index: 2;
     }
 

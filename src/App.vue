@@ -1,5 +1,7 @@
 <script>
 import { RouterView } from 'vue-router'
+import { useShowStore } from '@/stores/show.store'
+import { useUserStore } from '@/stores/user.store'
 import Header from '@/components/global.components/Header.vue'
 import Footer from '@/components/global.components/Footer.vue'
 
@@ -13,6 +15,12 @@ export default {
       return{
         onDesktop: null,
       }
+    },
+    setup() {
+      const showStore = useShowStore();
+      const userStore = useUserStore();
+      showStore.initShows();
+      return { showStore, userStore }
     },
     created() {
       this.checkDevice()

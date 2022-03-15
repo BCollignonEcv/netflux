@@ -1,13 +1,13 @@
 <template>
     <div class="slider-item">
-        <div class="card-show" @mouseenter="hovered" @mouseleave="hovered">
+        <div class="card-show" @mouseover="mouseover" @mouseleave="mouseleave">
             <figure>
-                <img v-if="hasImg" :src="formatedShow.image.medium" alt="" srcset="" @click="$router.push(`/show/${formatedShow.id}`)">
-                <img v-else class="empty-img" @click="$router.push(`/show/${show.id}`)" >
+                <img v-if="hasImg" :src="formatedShow.image.medium" :alt="formatedShow.name + '-picture'" srcset="" @click="goToShow">
+                <img v-else class="empty-img" @click="$router.push(`/show/${formatedShow.id}`)" alt="empty-picture">
                 <figcaption v-if="hover" class="card-show-description">
                     <div class="left">
-                        <p v-if="show.name">{{show.name}}</p>
-                        <p v-if="show.date">{{show.date}}</p>
+                        <p v-if="formatedShow.name">{{formatedShow.name}}</p>
+                        <p v-if="formatedShow.date">{{formatedShow.date}}</p>
                     </div>
                     <div class="right"> 
                         <template v-if="wishlist">
@@ -16,7 +16,7 @@
                                 <HeartIcon v-else fillColor="white" title="Add to my list"/>
                             </button>
                         </template>
-                        <p v-if="show.rating" >{{show.rating.average}}</p>
+                        <p v-if="formatedShow.rating" >{{formatedShow.rating.average}}</p>
                     </div>
                 </figcaption>
             </figure>
@@ -67,19 +67,23 @@ export default {
         return { userStore }
     },
     methods: {
-        hovered(){
-            this.hover = !this.hover;
-            if(this.hover){
-                this.isWhishlisted = this.userStore.hasShow(this.show.id);
-            }
+        mouseover: function () {
+            this.hover = true;
+            this.isWhishlisted = this.userStore.hasShow(this.formatedShow.id);
         },
-        toggleFromMyList(){
+        mouseleave: function () {
+            this.hover = false;
+        },
+        goToShow: function() {
+            this.$router.push(`/show/${this.formatedShow.id}`)
+        },
+        toggleFromMyList: function(){
             if(this.isWhishlisted){
                 this.isWhishlisted = false;
-                this.userStore.removeShow(this.show)
+                this.userStore.removeShow(this.formatedShow)
             }else{
                 this.isWhishlisted = true;
-                this.userStore.addShow(this.show)
+                this.userStore.addShow(this.formatedShow)
             }
         },
     }   
@@ -98,7 +102,7 @@ export default {
 
     .card-show-description{
         @include customFlex($mode: 'extend');
-        @include customColor($color: 'filter');
+        @include customFilter();
         align-items: flex-end;
         position: absolute;
         bottom: 0;
@@ -108,6 +112,7 @@ export default {
         height: 50%;
         padding: 10px;
         font-weight: bold;
+        pointer-events: none;
 
         .left{
                 text-align: left;
@@ -115,6 +120,10 @@ export default {
 
         .right{
             text-align: right;
+
+            button {
+                pointer-events: auto;
+            }
         }
     }
 }

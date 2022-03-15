@@ -1,18 +1,11 @@
 <script>
-import { useRoute } from 'vue-router';
 import { useShowStore } from '@/stores/show.store';
 
 export default {
     name: 'ShowComments',
-    components: {
-        
-    },
+    components: {},
     setup() {
-        const route = useRoute();
         const showStore = useShowStore();
-
-        const id = route.params.id;
-
         return { showStore };
     },
     props: {
@@ -31,7 +24,6 @@ export default {
 
 <template>
     <div class="show__comments">
-
         <h3 class="show__comments-title">Comments</h3>
 
         <div class="show__comments-list">

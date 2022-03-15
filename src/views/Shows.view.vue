@@ -1,18 +1,26 @@
 <template>
-  <Section :height="'landing'" :padding="true">
-    <template v-if="userStore.hasOneShow">
+  <Section :padding="true">
+      <Slider :title="'Search'" :shows="showStore.getSearchedShows"/>
+  </Section>
+  <Section :padding="true">
       <Slider :title="'My list'" :shows="userStore.getShowsList"/>
-    </template>
-    <Slider :title="'Search'" :shows="showStore.getSearchedShows"/>
-    <Slider :title="'All'" :shows="showStore.getShows"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Actions :'" :shows="showStore.getShowsByGenre('Action')"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Comedy :'" :shows="showStore.getShowsByGenre('Comedy')"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Family :'" :shows="showStore.getShowsByGenre('Family')"/>
   </Section>
 </template>
 
 <script>
+import { Section } from '@/components/layer.components'
+import { Slider } from '@/components/Custom/Slider'
 import { useShowStore } from '@/stores/show.store'
 import { useUserStore } from '@/stores/user.store'
-import Section from '@/components/layer.components/Section.layer.vue'
-import Slider from '@/components/Custom/Slider/Slider.vue'
 
 export default {
   name: 'Shows',
@@ -22,7 +30,6 @@ export default {
   setup() {
     const showStore = useShowStore();
     const userStore = useUserStore();
-    showStore.initShows();
     return { showStore, userStore }
   },
 }

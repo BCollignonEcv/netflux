@@ -28,42 +28,83 @@ export default {
         }
     },
     data(){
-        return {}
+        return {
+            slideByPage: 8,
+        }
     },
     computed: {
         hasShows(){
-            return this.shows && this.shows.length > 0
+            return this.shows && Object.keys(this.shows).length > 0
+        },
+        hasEnoughtShowsToLoop(){
+            return Object.keys(this.shows).length > this.slideByPage
         }
     },
 }
 </script>
 
 <template v-if="hasShows">
-  <div class="shows-list">
+  <div class="shows-list" :id="Object.keys(this.shows).length">
       <h2 v-if="title && hasShows" class="title">{{title}}</h2>
       <div class="shows-list-container">
         <Swiper class="swiper"
-            :slidesPerView="8"
-            :slidesPerGroup="8"
+            :slidesPerView="slideByPage"
+            :slidesPerGroup="slideByPage"
             :spaceBetween="24"
-            :loop="true"
+            :loop="hasEnoughtShowsToLoop"
             :navigation="true"
+            :lazyLoading="true"
             :modules="modules">
             <swiper-slide v-for="show in shows" :key="show.id">
                 <SliderItem 
                     :show="show"
-                    :wishlist="wishlist" 
+                    :wishlist="wishlist"
                 />
             </swiper-slide>
+
         </Swiper>
       </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .shows-list{
     .title{
-        margin-bottom: var(--m-3);
+        margin-bottom: var(--m-5);
+    }
+
+    .swiper-button-prev{
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 3vw;
+        margin: auto;
+        color: var(--c-primary);
+        transition: all .3s ease-in-out;
+
+        &:hover{
+            @include customColor($color: 'filter');
+            width: 5vw;
+            color: var(--c-primary);
+            transition: all .3s ease-in-out;
+        }
+    }
+
+    .swiper-button-next{
+        top: 0;
+        right: 0;
+        height: 100%;
+        width: 5vw;
+        margin: auto;
+        color: var(--c-primary);
+        transition: all .3s ease-in-out;
+
+        &:hover{
+            @include customColor($color: 'filter');
+            width: 5vw;
+            color: var(--c-primary);
+            transition: all .3s ease-in-out;
+        }
     }
 }
 

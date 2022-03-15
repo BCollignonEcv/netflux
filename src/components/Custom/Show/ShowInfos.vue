@@ -1,5 +1,5 @@
 <script>
-import ShowEpisodes from '@/components/Custom/Show/ShowEpisodes.vue';
+import ShowEpisodes from './ShowEpisodes.vue';
 
 export default {
     name: 'ShowInfos',
@@ -36,7 +36,7 @@ export default {
                 <p class="show__infos-elem">
                     <span class="show__infos-elem-title">Cast: </span>
                     <span v-if="show !== undefined && show._embedded !== undefined && show._embedded.cast !== undefined">
-                        <span v-for="(item, index) in show._embedded.cast" v-bind:key="item.person.id">
+                        <span v-for="(item, index) in show._embedded.cast" :key="'cast-'+item.person.id">
                             <span v-if="index !== 0">,</span>
                             {{item.person.name}}
                         </span>

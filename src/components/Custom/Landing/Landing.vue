@@ -1,11 +1,11 @@
 <script>
 
-import ButtonComponent from '@/components/form.components/button.form.vue'
+import { Button } from '@/components/form.components'
 
 export default {
     name: 'Landing',
     components: {
-        ButtonComponent
+        Button
     },
     props: ['shows'],
     data(){
@@ -61,10 +61,10 @@ export default {
                 <h2 class="title">{{show.name}}</h2>
                 <div class="description" v-html="show.summary"></div>
                 <RouterLink :to="'/show/'+ show.id">
-                    <ButtonComponent>Play</ButtonComponent>
+                    <Button>Play</Button>
                 </RouterLink>
                 <RouterLink :to="'/show/'+ show.id">
-                    <ButtonComponent :typeColor="'secondary'">Infos</ButtonComponent>
+                    <Button :typeColor="'secondary'">Infos</Button>
                 </RouterLink>
             </div>
         </div>
@@ -81,7 +81,7 @@ export default {
     transition: all 200ms ease-in-out;
 
     .filter{
-        @include customColor($color: 'filter');
+        @include customFilter();
         position: relative;
         height: inherit;
         .content{

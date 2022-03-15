@@ -5,7 +5,7 @@
         </div>
         <div class="show">
             <div class="cover" v-if="episode !== undefined && episode.image !== undefined && episode.image.original !== undefined">
-                <img :src="episode.image.original"> <!--  https://static.tvmaze.com/uploads/images/original_untouched/1/4388.jpg -->
+                <img :src="episode.image.original" :alt="episode.name + '-picture'"> <!--  https://static.tvmaze.com/uploads/images/original_untouched/1/4388.jpg -->
             </div>
             <div class="description">
                 <h1 class="title">{{episode.name}}</h1><br>
@@ -16,29 +16,42 @@
             </div>
         </div>
         <div class="routerEp">
-            <RouterLink :to="'/episode/'+ prevEp" class="routerEp-btn">
-                Previous episode {{ episode.id-1 }}
+            <RouterLink @click="showStore.initEpisode(prevEp)" :to="'/episode/'+ prevEp" class="routerEp-btn">
+                Previous episode
             </RouterLink>
-            <RouterLink :to="'/episode/'+ nextEp" class="routerEp-btn">
-                Next episode {{ episode.id+1 }}
+            <RouterLink @click="showStore.initEpisode(nextEp)" :to="'/episode/'+ nextEp" class="routerEp-btn">
+                Next episode
             </RouterLink>
         </div>
     </div>    
 </template>
 
 <script>
+import { useShowStore } from '@/stores/show.store'
 
 export default {
   name: 'EpisodeItem',
   props: {
     episode: Object
   },
-  data(){
-    return {
-        prevEp: this.episode.id - 1,
-        nextEp: this.episode.id + 1
-    }
+  setup() {
+    const showStore = useShowStore();
+    return { showStore }
   },
+  computed: {
+        prevEp() {
+            return this.episode.id-1
+        },
+        nextEp() {
+            return this.episode.id+1
+        } 
+  },
+//   data(){
+//     return {
+//         prevEp: this.episode.id-1,
+//         nextEp: this.episode.id+1
+//     }
+//   },
   mounted(){
   }
 }

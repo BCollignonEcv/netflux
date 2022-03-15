@@ -1,9 +1,9 @@
 <script>
 import { useShowStore } from '@/stores/show.store'
 import { useUserStore } from '@/stores/user.store'
-import Section from '@/components/layer.components/Section.layer.vue'
-import Slider from '@/components/Custom/Slider/Slider.vue'
-import Landing from '@/components/Custom/Landing/Landing.vue'
+import { Section } from '@/components/layer.components'
+import { Slider } from '@/components/Custom/Slider'
+import { Landing } from '@/components/Custom/Landing'
 
 export default {
   name: 'Home',
@@ -13,7 +13,6 @@ export default {
   setup() {
     const showStore = useShowStore();
     const userStore = useUserStore();
-    showStore.initShows();
     return { showStore, userStore }
   },
   data() {
@@ -21,25 +20,27 @@ export default {
     }
   },
   computed: {},
-  methods: {}
+  mounted(){
+    
+  },
+  methods: {},
 }
 </script>
 
 <template>
   <Section :height="'landing'">
-    <Landing :shows="showStore.getShowsHightLight"></Landing>    
+    <Landing :shows="showStore.getShowsHightLight"></Landing>
   </Section>
   <Section :padding="true" :overlay="true">
     <Slider :title="'HightLigth'" :shows="showStore.getShowsHightLight"/>
   </Section>
   <Section :padding="true">
-    <Slider :title="'All shows'" :shows="showStore.getShowsExeptHightLight"/>
+    <Slider :title="'Actions :'" :shows="showStore.getShowsByGenre('Action')"/>
   </Section>
-    <!-- <Section>
-    <transition>
-      <template v-if="userStore.hasOneShow">
-        <Slider :title="'Your selection'" :options="{ wishlistDisabled: true, scrollabled: true}" :shows="userStore.getShowsListFirstTen"/>
-      </template>
-    </transition>
-  </Section> -->
+  <Section :padding="true">
+    <Slider :title="'Comedy :'" :shows="showStore.getShowsByGenre('Comedy')"/>
+  </Section>
+  <Section :padding="true">
+    <Slider :title="'Family :'" :shows="showStore.getShowsByGenre('Family')"/>
+  </Section>
 </template>
