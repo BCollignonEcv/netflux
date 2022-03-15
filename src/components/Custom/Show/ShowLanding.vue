@@ -10,7 +10,10 @@ export default {
     },
     computed: {
         ready(){
-            return this.show !== undefined && this.show.image !== undefined && this.show.image.original !== undefined
+            if(this.show !== undefined && this.show.image){
+                return 'original' in this.show.image
+            }
+            return false
         }
     },
 }
@@ -20,6 +23,10 @@ export default {
 <template>
     <div v-if="ready" class="show__landing">
         <img class="show__landing-img" :src="show.image.original" alt="Show landing image">
+        <div class="show__landing-overlay"></div>
+    </div>
+    <div v-else class="show__landing">
+        <img class="show__landing-img" src="@/assets/img/empty-img.jpg" alt="Show landing image">
         <div class="show__landing-overlay"></div>
     </div>
 </template>

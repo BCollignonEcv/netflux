@@ -3,7 +3,7 @@
         <div class="card-show" @mouseover="mouseover" @mouseleave="mouseleave">
             <figure>
                 <img v-if="hasImg" :src="formatedShow.image.medium" :alt="formatedShow.name + '-picture'" srcset="" @click="goToShow">
-                <img v-else class="empty-img" @click="$router.push(`/show/${formatedShow.id}`)" alt="empty-picture">
+                <img v-else src="@/assets/img/empty-img.jpg" class="notfound-img" alt="empty-picture" @click="goToShow">
                 <figcaption v-if="hover" class="card-show-description">
                     <div class="left">
                         <p v-if="formatedShow.name">{{formatedShow.name}}</p>
@@ -98,6 +98,11 @@ export default {
 
     img{
         width: 100%;
+
+        &.notfound-img{
+            height: 100%;
+            background-color: var(--c-neutral);
+        }
     }
 
     .card-show-description{
