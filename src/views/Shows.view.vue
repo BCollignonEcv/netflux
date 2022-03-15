@@ -23,8 +23,8 @@
 </template>
 
 <script>
-import Section from '@/components/layer.components/Section.layer.vue'
-import Slider from '@/components/Custom/Slider/Slider.vue'
+import { Section } from '@/components/layer.components'
+import { Slider } from '@/components/Custom/Slider'
 import { useShowStore } from '@/stores/show.store'
 import { useUserStore } from '@/stores/user.store'
 

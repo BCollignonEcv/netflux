@@ -1,9 +1,9 @@
 <script>
 import { useShowStore } from '@/stores/show.store'
 import { useUserStore } from '@/stores/user.store'
-import Section from '@/components/layer.components/Section.layer.vue'
-import Slider from '@/components/Custom/Slider/Slider.vue'
-import Landing from '@/components/Custom/Landing/Landing.vue'
+import { Section } from '@/components/layer.components'
+import { Slider } from '@/components/Custom/Slider'
+import { Landing } from '@/components/Custom/Landing'
 
 export default {
   name: 'Home',

@@ -1,5 +1,4 @@
 <script>
-
 export default {
     name: 'ShowBanner',
     props: {
@@ -9,14 +8,16 @@ export default {
         return {}
     },
     computed: {
-        
+        ready(){
+            return show !== undefined && show.image !== undefined && show.image.original !== undefined
+        }
     },
 }
 
 </script>
 
 <template>
-    <div v-if="show !== undefined && show.image !== undefined && show.image.original !== undefined" class="show__banner">
+    <div v-if="ready" class="show__banner">
         <img class="show__banner-img" :src="show.image.original" alt="Show banner image">
         <div class="show__banner-overlay"></div>
     </div>

@@ -12,9 +12,8 @@
 
 <script>
 import { useUserStore } from '@/stores/user.store'
-import Section from '@/components/layer.components/Section.layer.vue'
-import Slider from '@/components/Custom/Slider/Slider.vue'
-import SliderItem from '@/components/Custom/Slider/SliderItem.vue'
+import { Section } from '@/components/layer.components'
+import { Slider, SliderItem } from '@/components/Custom/Slider'
 
 export default {
   components: {

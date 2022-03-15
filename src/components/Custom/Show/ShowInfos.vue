@@ -1,5 +1,5 @@
 <script>
-import ShowEpisodes from '@/components/Custom/Show/ShowEpisodes.vue';
+import ShowEpisodes from './ShowEpisodes.vue';
 
 export default {
     name: 'ShowInfos',

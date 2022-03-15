@@ -4,9 +4,7 @@ import { useShowStore } from '@/stores/show.store';
 
 export default {
     name: 'ShowComments',
-    components: {
-        
-    },
+    components: {},
     setup() {
         const route = useRoute();
         const showStore = useShowStore();
@@ -30,9 +28,7 @@ export default {
 
 <template>
     <div class="show__comments">
-
         <h3 class="show__comments-title">Comments</h3>
-        
     </div>
 </template>
 
