@@ -1,6 +1,7 @@
 <script>
+
 export default {
-    name: 'ShowBanner',
+    name: 'ShowLanding',
     props: {
         show: Object,
     },
@@ -9,7 +10,7 @@ export default {
     },
     computed: {
         ready(){
-            return show !== undefined && show.image !== undefined && show.image.original !== undefined
+            return this.show !== undefined && this.show.image !== undefined && this.show.image.original !== undefined
         }
     },
 }
@@ -17,26 +18,26 @@ export default {
 </script>
 
 <template>
-    <div v-if="ready" class="show__banner">
-        <img class="show__banner-img" :src="show.image.original" alt="Show banner image">
-        <div class="show__banner-overlay"></div>
+    <div v-if="ready" class="show__landing">
+        <img class="show__landing-img" :src="show.image.original" alt="Show landing image">
+        <div class="show__landing-overlay"></div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .show__banner {
+    .show__landing {
         position: relative;
         width: 100%;
         height: 60vh;
     }
 
-    .show__banner-img {
+    .show__landing-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
-    .show__banner-overlay {
+    .show__landing-overlay {
         position: absolute;
         top: 0;
         left: 0;

@@ -35,21 +35,9 @@ export default {
     <Slider :title="'HightLigth'" :shows="showStore.getShowsHightLight"/>
   </Section>
   <Section :padding="true">
-    <Slider :title="'All shows'" :shows="showStore.getShowsExceptHightLight"/>
-  </Section>
-  <Section :padding="true">
     <Slider :title="'Actions :'" :shows="showStore.getShowsByGenre('Action')"/>
   </Section>
   <Section :padding="true">
-    <Slider :title="'Crime :'" :shows="showStore.getShowsByGenre('Crime')"/>
-  </Section>
-  <Section :padding="true">
-    <Slider :title="'Family :'" :shows="showStore.getShowsByGenre('Family')"/>
-  </Section>
-  <Section :padding="true">
     <Slider :title="'Comedy :'" :shows="showStore.getShowsByGenre('Comedy')"/>
-  </Section>
-  <Section :padding="true">
-    <Slider :title="'Drama :'" :shows="showStore.getShowsByGenre('Drama')"/>
   </Section>
 </template>

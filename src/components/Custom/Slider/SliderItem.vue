@@ -75,8 +75,6 @@ export default {
             this.hover = false;
         },
         goToShow: function() {
-            console.log(this.$router)
-            console.log(`/show/${this.formatedShow.id}`)
             this.$router.push(`/show/${this.formatedShow.id}`)
         },
         toggleFromMyList: function(){

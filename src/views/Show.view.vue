@@ -1,6 +1,9 @@
 <template>
   <div class="show__container">
     <Section>
+      <ShowLanding :show="showStore.getShow" />
+    </Section>
+    <Section>
       <ShowInfos :show="showStore.getShow" />
     </Section>
     <Section>
@@ -14,22 +17,26 @@
 import { useRoute } from 'vue-router';
 import { useShowStore } from '@/stores/show.store';
 import { Section } from '@/components/layer.components';
-import { ShowBanner, ShowInfos, ShowComments } from '@/components/Custom/Show';
+import { ShowLanding, ShowInfos, ShowComments } from '@/components/Custom/Show';
 
 export default {
   name: 'Show',
   components: {
     Section,
-    ShowBanner,
+    ShowLanding,
     ShowInfos,
     ShowComments
+  },
+  data() {
+    return{
+      show: []
+    }
   },
   setup() {
     const route = useRoute();
     const showStore = useShowStore();
 
     const id = route.params.id;
-
     showStore.initShowWithEpisodes(id);
 
     return { showStore };

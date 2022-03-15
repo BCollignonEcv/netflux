@@ -1,16 +1,11 @@
 <script>
-import { useRoute } from 'vue-router';
 import { useShowStore } from '@/stores/show.store';
 
 export default {
     name: 'ShowComments',
     components: {},
     setup() {
-        const route = useRoute();
         const showStore = useShowStore();
-
-        const id = route.params.id;
-
         return { showStore };
     },
     props: {
