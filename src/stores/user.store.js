@@ -13,9 +13,7 @@ export const useUserStore = defineStore({
         // HAS
         hasOneShow: (state) => { return state.showsList.length > 0 ? true : false },
         hasShow: (state) => {
-            return (showID) => {
-                return state.showsList.find(x => x.id === showID) ? true : false;
-            }
+            return (showID) => state.showsList.find(x => x.id === showID) ? true : false;
         },
     },
     actions: {

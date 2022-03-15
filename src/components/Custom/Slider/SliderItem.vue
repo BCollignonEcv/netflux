@@ -69,7 +69,7 @@ export default {
     methods: {
         mouseover: function () {
             this.hover = true;
-            this.isWhishlisted = this.userStore.hasShow(this.show.id);
+            this.isWhishlisted = this.userStore.hasShow(this.formatedShow.id);
         },
         mouseleave: function () {
             this.hover = false;
@@ -80,10 +80,10 @@ export default {
         toggleFromMyList: function(){
             if(this.isWhishlisted){
                 this.isWhishlisted = false;
-                this.userStore.removeShow(this.show)
+                this.userStore.removeShow(this.formatedShow)
             }else{
                 this.isWhishlisted = true;
-                this.userStore.addShow(this.show)
+                this.userStore.addShow(this.formatedShow)
             }
         },
     }   
