@@ -19,9 +19,8 @@
 
 import { useRoute } from 'vue-router';
 import { useShowStore } from '@/stores/show.store';
-import ShowCommentForm from '@/components/form.components/Comment.form.vue';
 import { Section } from '@/components/layer.components';
-import { ShowLanding, ShowInfos, ShowComments } from '@/components/Custom/Show';
+import { ShowLanding, ShowInfos, ShowComments, ShowCommentForm } from '@/components/Custom/Show';
 
 export default {
   name: 'Show',
