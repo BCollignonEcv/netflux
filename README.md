@@ -1,16 +1,11 @@
 # netflux
 
-Render : https://bcollignonecv.github.io/netflux/
+Render : https://bcollignonecv.github.io/netflux/  
 Groupe : Gautier Maire | Vincent Manach | Baptiste Collignon
 
-## TODO 
+## Warning
 
-- Homepage : Baptiste
-- Recherche : Baptiste
-    - results : Baptiste
-- Show : Gautier
-    - Epidodes : Vincent
-- Commentaire : ???
+Nous n'avons pas utilisé le local storage avec pinia puisque le store.$reset() ne fonctionne pas correctement.
 
 ## Project Setup
 
@@ -28,4 +23,10 @@ npm run dev
 
 ```sh
 npm run build
+```
+
+### Deploy on Github Page
+
+```sh
+npm run deploy
 ```
